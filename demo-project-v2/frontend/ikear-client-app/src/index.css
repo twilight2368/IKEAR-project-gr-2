@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "IBM Plex Sans JP", sans-serif;
+  @apply min-h-screen;
+  @apply bg-white;
+  @apply p-0;
+  @apply m-0;
+  @apply text-black;
+  @apply overflow-hidden;
+}
+
+.main-content-height {
+  height: calc(100vh - 64px);
+}
+
+
+.ibm-font{
+  font-family: "IBM Plex Sans JP", sans-serif;
+}
