@@ -3,6 +3,7 @@ import classnames from "classnames";
 import { FaShoppingBag } from "react-icons/fa";
 import { FaBox } from "react-icons/fa6";
 import { GoHomeFill } from "react-icons/go";
+import { TbChristmasBall } from "react-icons/tb";
 export default function StoreHeader() {
   return (
     <div className="w-full flex flex-row justify-start items-center gap-6 h-full p-6">
@@ -14,7 +15,7 @@ export default function StoreHeader() {
       />
       <StoreHeaderItem
         label="Shop products"
-        to="/store/products"
+        to="/store/product"
         end={false}
         icon={<FaBox />}
       />
@@ -23,6 +24,12 @@ export default function StoreHeader() {
         to="/store/room"
         end={false}
         icon={<GoHomeFill />}
+      />
+      <StoreHeaderItem
+        label="Holiday shop"
+        to="/store/holiday"
+        end={false}
+        icon={<TbChristmasBall />}
       />
     </div>
   );

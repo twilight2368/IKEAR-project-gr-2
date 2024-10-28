@@ -1,17 +1,17 @@
 import ImageTest from "../../assets/images/polar-bear.png";
 
-export default function ItemCategoryRoom() {
+export default function ItemCategoryRoom({ image_display, label }) {
   return (
-    <div className="w-full h-full">
-      <div className=" h-3/4 w-full flex justify-center items-center">
+    <div className="w-full h-full relative">
+      <div className=" h-full w-full flex justify-center items-center">
         <img
-          src={ImageTest}
+          src={image_display}
           alt="image"
-          className="h-full aspect-square rounded-full border-2 border-black"
+          className="h-full aspect-square rounded-full border-[1px] border-black"
         />
       </div>
-      <div className=" h-1/4 w-full flex justify-center items-center">
-        Category item
+      <div className="absolute top-0 right-1/2 translate-x-1/2 z-[1] rounded-full h-full aspect-square bg-black/60 duration-100 opacity-50 hover:opacity-100  text-white flex justify-center items-center">
+        {label}
       </div>
     </div>
   );
