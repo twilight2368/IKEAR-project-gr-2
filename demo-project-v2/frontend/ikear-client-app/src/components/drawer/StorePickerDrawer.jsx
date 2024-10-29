@@ -24,7 +24,7 @@ export default function StorePickerDrawer() {
         overlay={false}
         placement="right"
         size={600}
-        className="p-4 border-black border-l-2 shadow-md shadow-black"
+        className="p-4 border-black border-l-2 shadow-md shadow-black z-50"
       >
         Hello world
       </Drawer>

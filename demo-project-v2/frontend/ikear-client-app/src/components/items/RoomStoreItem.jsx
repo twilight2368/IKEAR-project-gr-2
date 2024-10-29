@@ -1,8 +1,14 @@
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 export default function RoomStoreItem({ label, background_image }) {
+  const navigate = useNavigate();
   return (
-    <div className="relative h-48 p-0">
+    <div
+      className="relative h-48 p-0 cursor-pointer"
+      onClick={() => {
+        navigate("/store/room/room-id");
+      }}
+    >
       <div className="relative w-full h-full">
         <img src={background_image} alt="" className="w-full h-full" />
       </div>

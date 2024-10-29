@@ -16,7 +16,16 @@ body {
   height: calc(100vh - 64px);
 }
 
-
-.ibm-font{
+.ibm-font {
   font-family: "IBM Plex Sans JP", sans-serif;
+}
+
+.hide-scroll-bar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.custom-scroll-bar {
+  scrollbar-width: thin ;
+  scrollbar-color: black transparent ;
 }

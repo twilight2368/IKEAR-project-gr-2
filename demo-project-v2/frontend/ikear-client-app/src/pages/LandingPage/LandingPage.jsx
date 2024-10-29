@@ -102,7 +102,7 @@ export default function LandingPage() {
                 className=" text-white bg-black rounded-full duration-150 opacity-20 hover:opacity-100"
                 onClick={() => {
                   category_ref.current.scrollBy(
-                    -category_ref.current.clientWidth / 2,
+                    -category_ref.current.clientWidth,
                     0
                   );
                 }}
@@ -116,7 +116,7 @@ export default function LandingPage() {
                 className=" text-white bg-black rounded-full duration-150 opacity-20 hover:opacity-100"
                 onClick={() => {
                   category_ref.current.scrollBy(
-                    category_ref.current.clientWidth / 2,
+                    category_ref.current.clientWidth,
                     0
                   );
                 }}
@@ -125,85 +125,85 @@ export default function LandingPage() {
               </IconButton>
             </div>
             <div
-              className="w-full h-full flex flex-nowrap overflow-x-scroll hide-scroll-bar"
+              className="hide-scroll-bar  w-full h-full flex flex-nowrap overflow-x-scroll"
               style={{
                 scrollBehavior: "smooth",
               }}
               ref={category_ref}
             >
-              <div className=" h-full w-1/4 flex-shrink-0 p-2">
+              <div className=" h-full w-1/3 flex-shrink-0 p-2">
                 <ItemCategoryRoom
                   image_display={CategoryRoomBG_Living_room}
                   label={"Living room"}
                 />
               </div>
-              <div className=" h-full w-1/4 flex-shrink-0 p-2">
+              <div className=" h-full w-1/3 flex-shrink-0 p-2">
                 <ItemCategoryRoom
                   image_display={CategoryRoomBG_Bedroom}
                   label={"Bedroom"}
                 />
               </div>
-              <div className=" h-full w-1/4 flex-shrink-0 p-2">
+              <div className=" h-full w-1/3 flex-shrink-0 p-2">
                 <ItemCategoryRoom
                   image_display={CategoryRoomBG_Bath_room}
                   label={"Bathroom"}
                 />
               </div>
-              <div className=" h-full w-1/4 flex-shrink-0 p-2">
+              <div className=" h-full w-1/3 flex-shrink-0 p-2">
                 <ItemCategoryRoom
                   image_display={CategoryRoomBG_Kitchen}
                   label={"Kitchen"}
                 />
               </div>
-              <div className=" h-full w-1/4 flex-shrink-0 p-2">
+              <div className=" h-full w-1/3 flex-shrink-0 p-2">
                 <ItemCategoryRoom
                   image_display={CategoryRoomBG_Dining_room}
                   label={"Dining room"}
                 />
               </div>
-              <div className=" h-full w-1/4 flex-shrink-0 p-2">
+              <div className=" h-full w-1/3 flex-shrink-0 p-2">
                 <ItemCategoryRoom
                   image_display={CategoryRoomBG_Children_room}
                   label={"Children room"}
                 />
               </div>
-              <div className=" h-full w-1/4 flex-shrink-0 p-2">
+              <div className=" h-full w-1/3 flex-shrink-0 p-2">
                 <ItemCategoryRoom
                   image_display={CategoryRoomBG_Study_room}
                   label={"Study room"}
                 />
               </div>
-              <div className=" h-full w-1/4 flex-shrink-0 p-2">
+              <div className=" h-full w-1/3 flex-shrink-0 p-2">
                 <ItemCategoryRoom
                   image_display={CategoryRoomBG__Office_room}
                   label={"Office"}
                 />
               </div>
-              <div className=" h-full w-1/4 flex-shrink-0 p-2">
+              <div className=" h-full w-1/3 flex-shrink-0 p-2">
                 <ItemCategoryRoom
                   image_display={CategoryRoomBG_Gaming_room}
                   label={"Gaming room"}
                 />
               </div>
-              <div className=" h-full w-1/4 flex-shrink-0 p-2">
+              <div className=" h-full w-1/3 flex-shrink-0 p-2">
                 <ItemCategoryRoom
                   image_display={CategoryRoomBG_Hallway}
                   label={"Hallway"}
                 />
               </div>
-              <div className=" h-full w-1/4 flex-shrink-0 p-2">
+              <div className=" h-full w-1/3 flex-shrink-0 p-2">
                 <ItemCategoryRoom
                   image_display={CategoryRoomBG_Laundry_room}
                   label={"Laundry room"}
                 />
               </div>
-              <div className=" h-full w-1/4 flex-shrink-0 p-2">
+              <div className=" h-full w-1/3 flex-shrink-0 p-2">
                 <ItemCategoryRoom
                   image_display={CategoryRoomBG_Garden}
                   label={"Garden"}
                 />
               </div>
-              <div className=" h-full w-1/4 flex-shrink-0 p-2">
+              <div className=" h-full w-1/3 flex-shrink-0 p-2">
                 <ItemCategoryRoom
                   image_display={CategoryRoomBG_garage}
                   label={"Garage"}
@@ -224,13 +224,11 @@ export default function LandingPage() {
           <ItemCategoryProduct />
           <ItemCategoryProduct />
           <ItemCategoryProduct />
-
           <ItemCategoryProduct />
           <ItemCategoryProduct />
           <ItemCategoryProduct />
           <ItemCategoryProduct />
           <ItemCategoryProduct />
-
           <ItemCategoryProduct />
           <ItemCategoryProduct />
           <ItemCategoryProduct />
