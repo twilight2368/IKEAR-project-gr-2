@@ -21,23 +21,23 @@ export default function ItemDetailsPage() {
   return (
     <div className="w-full min-h-screen">
       <div className="w-full min-h-[500px] flex flex-row items-start gap-6 px-6">
-        <div className="flex justify-center items-center">
-          <div className="h-[512px] aspect-square">
-            <Carousel className="rounded-xl">
+        <div className="w-1/3 flex justify-center items-center">
+          <div className="w-full h-full">
+            <Carousel className="w-full rounded-xl">
               <img
-                src="https://www.comfortfurniture.com.sg/image/cache/catalog/ComfortFurniture/Updated%20Pictures/Apex%20Study%20Table/W1500/Apex_Workstation_Study_Table_Jenfer_Office_Chair-2-1220x1220.jpg"
+                src="https://img.freepik.com/free-photo/mid-century-modern-living-room-interior-design-with-monstera-tree_53876-129805.jpg"
                 alt="image 1"
-                className="h-[512px] aspect-square object-cover"
+                className=" w-full aspect-square object-contain"
               />
               <img
-                src="https://www.comfortfurniture.com.sg/image/cache/catalog/ComfortFurniture/Updated%20Pictures/Apex%20Study%20Table/W1500/Apex_Workstation_Study_Table_Jenfer_Office_Chair-2-1220x1220.jpg"
+                src="https://img.freepik.com/free-photo/mid-century-modern-living-room-interior-design-with-monstera-tree_53876-129805.jpg"
                 alt="image 2"
-                className="h-[512px] aspect-square object-cover"
+                className="w-full aspect-square  object-contain"
               />
               <img
-                src="https://www.comfortfurniture.com.sg/image/cache/catalog/ComfortFurniture/Updated%20Pictures/Apex%20Study%20Table/W1500/Apex_Workstation_Study_Table_Jenfer_Office_Chair-2-1220x1220.jpg"
+                src="https://img.freepik.com/free-photo/mid-century-modern-living-room-interior-design-with-monstera-tree_53876-129805.jpg"
                 alt="image 3"
-                className="h-[512px] aspect-square object-cover"
+                className="w-full aspect-square  object-contain"
               />
             </Carousel>
           </div>

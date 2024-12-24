@@ -4,9 +4,12 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 import { Rating } from "@material-tailwind/react";
 import { FaCircleCheck } from "react-icons/fa6";
-import { FaStar, FaRegStar } from "react-icons/fa";
+import { FaStar, FaRegStar, FaHeartBroken } from "react-icons/fa";
 import { Link } from "react-router-dom";
-export default function ItemCard() {
+import { useState } from "react";
+
+export default function ItemCard({ isFav = false }) {
+  const [heartBroken, setHeartBroken] = useState(false);
   return (
     <div>
       <Card className=" shadow-none">
@@ -45,13 +48,34 @@ export default function ItemCard() {
               >
                 <MdOutlineAddShoppingCart />
               </IconButton>
-              <IconButton
-                variant="text"
-                color="white"
-                className="text-black text-xl rounded-full"
-              >
-                <FaRegHeart />
-              </IconButton>
+              {isFav ? (
+                <>
+                  {" "}
+                  <IconButton
+                    variant="text"
+                    color="red"
+                    className=" rounded-full text-xl "
+                    onMouseOver={() => {
+                      setHeartBroken(true);
+                    }}
+                    onMouseLeave={() => {
+                      setHeartBroken(false);
+                    }}
+                  >
+                    {heartBroken ? <FaHeartBroken /> : <FaHeart />}
+                  </IconButton>
+                </>
+              ) : (
+                <>
+                  <IconButton
+                    variant="text"
+                    color="white"
+                    className="text-black text-xl rounded-full"
+                  >
+                    <FaRegHeart />
+                  </IconButton>
+                </>
+              )}
             </div>
           </div>
         </CardBody>

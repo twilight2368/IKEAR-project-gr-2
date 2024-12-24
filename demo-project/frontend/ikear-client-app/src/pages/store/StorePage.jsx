@@ -15,6 +15,7 @@ import CategoryRoomBG_Hallway from "../../assets/images/rooms/PH199354.avif";
 import CategoryRoomBG_Laundry_room from "../../assets/images/rooms/a-yellow-tiled-laundry-room-with-a-white-nysjoen-cabinet-a-w-9e95bad7aad891b80136b497ba670a01.avif";
 import CategoryRoomBG_garage from "../../assets/images/rooms/PH175726.avif";
 import ItemCategoryProduct from "../../components/items/ItemCategoryProduct";
+import { Link } from "react-router-dom";
 export default function StorePage() {
   return (
     <div className="w-full">
@@ -133,7 +134,9 @@ export default function StorePage() {
             <ItemCategoryProduct />
             <ItemCategoryProduct />
           </div>
-          <div className="w-full text-center underline">See all products</div>
+          <div className="w-full text-center">
+            <Link to="/store/product" className=" hover:text-blue-400 hover:underline">View all products</Link>
+          </div>
         </div>
       </div>
     </div>
