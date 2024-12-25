@@ -7,9 +7,10 @@ const app = express();
 const services = {
   productCatalog: "http://localhost:3001",
   inventoryManagement: "http://localhost:3002",
-  orderManagement: "http://localhost:3003",
-  deliveryLogistics: "http://localhost:3004",
-  authManagement: "http://localhost:3005",
+  cartManagement: "http://localhost:3003",
+  orderManagement: "http://localhost:3004",
+  deliveryLogistics: "http://localhost:3005",
+  authManagement: "http://localhost:3006",
 };
 
 app.use(morgan("dev"));
@@ -25,6 +26,13 @@ app.use(
   "/inventory",
   createProxyMiddleware({
     target: services.inventoryManagement,
+    changeOrigin: true,
+  })
+);
+app.use(
+  "/cart",
+  createProxyMiddleware({
+    target: services.cartManagement,
     changeOrigin: true,
   })
 );
