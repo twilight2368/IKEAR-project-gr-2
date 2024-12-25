@@ -1,17 +1,67 @@
 const express = require("express");
 const { createProxyMiddleware } = require("http-proxy-middleware");
-
+const morgan = require("morgan");
 const app = express();
 
-// Proxy requests from React app to the Node backend
+// Configuration for microservices
+const services = {
+  productCatalog: "http://localhost:3001",
+  inventoryManagement: "http://localhost:3002",
+  orderManagement: "http://localhost:3003",
+  deliveryLogistics: "http://localhost:3004",
+  authManagement: "http://localhost:3005",
+};
+
+app.use(morgan("dev"));
+app.use(morgan("combined"));
+
+// Proxy routes
 app.use(
-  "/api", // Match all requests starting with "/api"
+  "/products",
+  createProxyMiddleware({ target: services.productCatalog, changeOrigin: true })
+);
+
+app.use(
+  "/inventory",
   createProxyMiddleware({
-    target: "http://localhost:8080", // Your Node backend server
+    target: services.inventoryManagement,
     changeOrigin: true,
-    pathRewrite: {
-      "^/api": "", // Remove "/api" prefix when forwarding
+  })
+);
+app.use(
+  "/orders",
+  createProxyMiddleware({
+    target: services.orderManagement,
+    changeOrigin: true,
+  })
+);
+app.use(
+  "/delivery",
+  createProxyMiddleware({
+    target: services.deliveryLogistics,
+    changeOrigin: true,
+  })
+);
+
+app.use(
+  "/auth",
+  createProxyMiddleware({
+    target: services.userManagement,
+    changeOrigin: true,
+    onProxyReq: (proxyReq, req, res) => {
+      //TODO:  Forward the client's cookies to the backend server
+      if (req.headers.cookie) {
+        proxyReq.setHeader("cookie", req.headers.cookie);
+      }
     },
+    onProxyRes: (proxyRes, req, res) => {
+      //TODO: Forward backend server's cookies to the client
+      const cookies = proxyRes.headers["set-cookie"];
+      if (cookies) {
+        res.setHeader("set-cookie", cookies);
+      }
+    },
+    logger: console,
   })
 );
 
