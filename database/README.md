@@ -49,7 +49,7 @@ password Hashed
 
 Table employee {
 id ObjectId
-\_store ObjectId [ref: > store.id]
+_store ObjectId [ref: > store.id]
 name String
 phone String
 email String
@@ -89,4 +89,4 @@ value string
 
 ```
 
-```
+
