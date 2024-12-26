@@ -11,7 +11,9 @@ app.use(morgan("dev"));
 app.use(morgan("combined"));
 
 app.get("/", (req, res) => {
-  res.send("Hello, World!");
+  res.json({
+    message: "Hello World",
+  });
 });
 
 app.use("/auth", router);

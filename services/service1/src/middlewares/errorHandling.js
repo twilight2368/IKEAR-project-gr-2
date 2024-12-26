@@ -4,3 +4,5 @@ function errorHandling(err, req, res, next) {
     message: "Something went wrong",
   });
 }
+
+module.exports = errorHandling;

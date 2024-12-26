@@ -1,11 +1,19 @@
 // mq.js
 const amqp = require("amqplib");
+const clc = require("cli-color");
 
 let channel = null;
 
 async function connectToRabbitMQ() {
-  const connection = await amqp.connect("amqp://localhost::5672");
-  channel = await connection.createChannel();
+  try {
+    const connection = await amqp.connect("amqp://localhost::5672");
+    channel = await connection.createChannel();
+  } catch (error) {
+    console.log("====================================");
+    console.error(clc.red("Error connecting to RabbitMQ"));
+    console.error(error);
+    console.log("====================================");
+  }
 }
 
 async function publishToQueue(queue, message) {
