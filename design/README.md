@@ -17,6 +17,8 @@
 
 - All queues needed for project
 
+![image design](./images/queues.png)
+
 ## 1.2. Details for IKEAR system
 
 ### 1.2.1. Customer Authentication, User management and Store management
@@ -25,8 +27,14 @@
 
 ### 1.2.2. Product Catalog Service and Inventory Management
 
+![image design](./images/service-2.png)
+
 ### 1.2.3. Cart management, Favorite List and Review Management
 
+![image design](./images/service-3.png)
+
 ### 1.2.4. Order Management - Payment Processing
+
+![image design](./images/service-4.png)
 
 ### 1.2.5. Delivery and Logistics
