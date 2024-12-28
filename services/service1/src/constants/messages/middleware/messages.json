@@ -1,0 +1,18 @@
+{
+  "not_authorized": {
+    "message": "Not authorized",
+    "status": 403
+  },
+  "no_access_token": {
+    "message": "No access token provided",
+    "status": 401
+  },
+  "no_refresh_token": {
+    "message": "No refresh token provided",
+    "status": 401
+  },
+  "no_cookie": {
+    "message": "No cookie provided",
+    "status": 401
+  }
+}
