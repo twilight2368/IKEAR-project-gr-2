@@ -1,71 +1,45 @@
 const express = require("express");
+const {
+  userRegister,
+  userLogin,
+  userLogout,
+  adminRegister,
+  adminLogin,
+  adminLogout,
+  storeRegister,
+  storeLogin,
+  storeLogout,
+} = require("../controllers/auth.controller");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.send("Hello, World!");
+  res.json({
+    message: "Hello world",
+  });
 });
 
-router.post("/register", (req, res, next) => {
-  try {
-  } catch (error) {
-    next(error);
-  }
-});
+//TODO: Users authentication routes
 
-router.post("/login", (req, res, next) => {
-  try {
-  } catch (error) {
-    next(error);
-  }
-});
+router.post("/register", userRegister);
 
-router.post("/logout", (req, res, next) => {
-  try {
-  } catch (error) {
-    next(error);
-  }
-});
+router.post("/login", userLogin);
 
-router.post("/admin-register", (req, res, next) => {
-  try {
-  } catch (error) {
-    next(error);
-  }
-});
+router.get("/logout", userLogout);
 
-router.post("/admin-login", (req, res, next) => {
-  try {
-  } catch (error) {
-    next(error);
-  }
-});
+//TODO: Admins authentication routes
 
-router.post("/admin-logout", (req, res, next) => {
-  try {
-  } catch (error) {
-    next(error);
-  }
-});
+router.post("/admin-register", adminRegister);
 
-router.post("/store-register", (req, res, next) => {
-  try {
-  } catch (error) {
-    next(error);
-  }
-});
+router.post("/admin-login", adminLogin);
 
-router.post("/store-login", (req, res, next) => {
-  try {
-  } catch (error) {
-    next(error);
-  }
-});
+router.get("/admin-logout", adminLogout);
 
-router.post("/store-logout", (req, res, next) => {
-  try {
-  } catch (error) {
-    next(error);
-  }
-});
+//TODO: Employees authentication routes
+
+router.post("/store-register", storeRegister);
+
+router.post("/store-login", storeLogin);
+
+router.get("/store-logout", storeLogout);
 
 module.exports = router;
