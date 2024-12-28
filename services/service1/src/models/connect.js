@@ -7,7 +7,9 @@ const Employee = require("./schema/Employee");
 const Admin = require("./schema/Admin");
 const Token = require("./schema/Token");
 
-const CONNECT_STRING = process.env.MONGODB_URI || "mongodb://localhost:27017/";
+const DB_CONFIG = require("../configs/db.config");
+
+const CONNECT_STRING = DB_CONFIG.stringConnect;
 
 const connectMongoDB = async () => {
   try {
