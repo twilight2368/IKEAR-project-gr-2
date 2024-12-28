@@ -4,7 +4,6 @@ const clc = require("cli-color");
 const Store = require("./schema/Store");
 const User = require("./schema/User");
 const Employee = require("./schema/Employee");
-const Admin = require("./schema/Admin");
 const Token = require("./schema/Token");
 
 const DB_CONFIG = require("../configs/db.config");
