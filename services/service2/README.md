@@ -1,1 +1,1 @@
-# Product Catalog Service
+# Product Catalog Service and Inventory Management
