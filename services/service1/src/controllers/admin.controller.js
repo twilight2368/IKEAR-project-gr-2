@@ -12,9 +12,7 @@ const deleteAdmin = async (req, res, next) => {
   }
 };
 
-module.exports = (req, res, next) => {
-  try {
-  } catch (error) {
-    next(error);
-  }
+module.exports = {
+  updateAdmin,
+  deleteAdmin,
 };

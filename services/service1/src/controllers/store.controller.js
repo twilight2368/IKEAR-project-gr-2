@@ -1,4 +1,10 @@
 //TODO: STORE CONTROLLERS
+const getStores = async (req, res, next) => {
+  try {
+  } catch (error) {
+    next(error);
+  }
+};
 
 const getStore = async (req, res, next) => {
   try {
@@ -30,6 +36,7 @@ const deleteStore = async (req, res, next) => {
 
 //TODO: Exports all controllers
 module.exports = {
+  getStores,
   getStore,
   createStore,
   updateStore,

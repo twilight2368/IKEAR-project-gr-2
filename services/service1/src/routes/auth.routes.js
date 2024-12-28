@@ -18,22 +18,28 @@ router.get("/", (req, res) => {
   });
 });
 
+//TODO: Users authentication routes
+
 router.post("/register", userRegister);
 
 router.post("/login", userLogin);
 
-router.post("/logout", userLogout);
+router.get("/logout", userLogout);
+
+//TODO: Admins authentication routes
 
 router.post("/admin-register", adminRegister);
 
 router.post("/admin-login", adminLogin);
 
-router.post("/admin-logout", adminLogout);
+router.get("/admin-logout", adminLogout);
+
+//TODO: Employees authentication routes
 
 router.post("/store-register", storeRegister);
 
 router.post("/store-login", storeLogin);
 
-router.post("/store-logout", storeLogout);
+router.get("/store-logout", storeLogout);
 
 module.exports = router;
