@@ -26,14 +26,6 @@ router.post("/login", userLogin);
 
 router.get("/logout", userLogout);
 
-//TODO: Admins authentication routes
-
-router.post("/admin-register", adminRegister);
-
-router.post("/admin-login", adminLogin);
-
-router.get("/admin-logout", adminLogout);
-
 //TODO: Employees authentication routes
 
 router.post("/store-register", storeRegister);

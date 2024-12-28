@@ -1,10 +1,15 @@
 const mongoose = require("mongoose");
+const ROLE_LIST = require("../../constants/roles/role");
 
 const phoneRegex =
   /^(?:\+?\d{1,3}[-.\s]?)?(?:\(?\d{2,4}\)?[-.\s]?)?\d{3,4}[-.\s]?\d{4}$/;
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-const ROLE = ["manager", "employee"];
+const ROLES = [
+  ROLE_LIST.ROLES.ADMIN,
+  ROLE_LIST.ROLES.EMPLOYEE,
+  ROLE_LIST.ROLES.MANAGER,
+];
 
 const EmployeeSchema = new mongoose.Schema(
   {
@@ -38,7 +43,7 @@ const EmployeeSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ROLE,
+      enum: ROLES,
       required: true,
     },
   },

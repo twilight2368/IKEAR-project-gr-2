@@ -5,7 +5,6 @@ const app = express();
 const authRouter = require("./routes/auth.routes");
 const storeRouter = require("./routes/store.routes");
 const employeeRouter = require("./routes/employee.routes");
-const adminRouter = require("./routes/admin.routes");
 const userRouter = require("./routes/user.routes");
 
 const errorHandling = require("./middlewares/errorHandling");
@@ -24,7 +23,6 @@ app.get("/", (req, res) => {
 
 app.use("/auth", authRouter);
 app.use("/store", storeRouter);
-app.use("/admin", adminRouter);
 app.use("/user", userRouter);
 app.use("/employee", employeeRouter);
 
