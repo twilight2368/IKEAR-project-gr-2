@@ -33,4 +33,37 @@ async function consumeFromQueue(queue, callback) {
   });
 }
 
-module.exports = { connectToRabbitMQ, publishToQueue, consumeFromQueue };
+async function publishToExchange(exchange, message) {
+  if (!channel) await connectToRabbitMQ();
+  await channel.assertExchange(exchange, "fanout", { durable: false });
+  channel.publish(exchange, "", Buffer.from(message));
+  console.log(
+    clc.green(`Message published to exchange '${exchange}': ${message}`)
+  );
+}
+
+async function consumeFromExchange(exchange, callback) {
+  if (!channel) await connectToRabbitMQ();
+  await channel.assertExchange(exchange, "fanout", { durable: false });
+
+  // Create a unique, temporary queue for each consumer
+  const { queue } = await channel.assertQueue("", { exclusive: true });
+  await channel.bindQueue(queue, exchange, "");
+
+  console.log(clc.blue(`Waiting for messages in queue '${queue}'...`));
+
+  channel.consume(queue, (msg) => {
+    if (msg !== null) {
+      callback(msg.content.toString());
+      channel.ack(msg);
+    }
+  });
+}
+
+module.exports = {
+  connectToRabbitMQ,
+  publishToQueue,
+  consumeFromQueue,
+  publishToExchange,
+  consumeFromExchange,
+};
