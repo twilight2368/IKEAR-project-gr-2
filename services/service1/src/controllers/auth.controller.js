@@ -1,4 +1,4 @@
-//TODO: AUTHENTICATION ROUTES
+//TODO: AUTHENTICATION CONTROLLERS
 
 /**
  * todo: Register a new user
@@ -6,14 +6,12 @@
  * @param {*} res
  * @param {*} next
  */
-const userRegister = (req, res, next) => {
+const userRegister = async (req, res, next) => {
   try {
   } catch (error) {
     next(error);
   }
 };
-
-
 
 /**
  * todo: Login a user
@@ -21,7 +19,7 @@ const userRegister = (req, res, next) => {
  * @param {*} res
  * @param {*} next
  */
-const userLogin = (req, res, next) => {
+const userLogin = async (req, res, next) => {
   try {
   } catch (error) {
     next(error);
@@ -35,7 +33,7 @@ const userLogin = (req, res, next) => {
  * @param {*} next
  */
 
-const userLogout = (req, res, next) => {
+const userLogout = async (req, res, next) => {
   try {
   } catch (error) {
     next(error);
@@ -49,7 +47,7 @@ const userLogout = (req, res, next) => {
  * @param {*} next
  */
 
-const adminRegister = (req, res, next) => {
+const adminRegister = async (req, res, next) => {
   try {
   } catch (error) {
     next(error);
@@ -62,7 +60,7 @@ const adminRegister = (req, res, next) => {
  * @param {*} res
  * @param {*} next
  */
-const adminLogin = (req, res, next) => {
+const adminLogin = async (req, res, next) => {
   try {
   } catch (error) {
     next(error);
@@ -75,7 +73,7 @@ const adminLogin = (req, res, next) => {
  * @param {*} res
  * @param {*} next
  */
-const adminLogout = (req, res, next) => {
+const adminLogout = async (req, res, next) => {
   try {
   } catch (error) {
     next(error);
@@ -89,7 +87,7 @@ const adminLogout = (req, res, next) => {
  * @param {*} next
  */
 
-const storeRegister = (req, res, next) => {
+const storeRegister = async (req, res, next) => {
   try {
   } catch (error) {
     next(error);
@@ -103,7 +101,7 @@ const storeRegister = (req, res, next) => {
  * @param {*} next
  */
 
-const storeLogin = (req, res, next) => {
+const storeLogin = async (req, res, next) => {
   try {
   } catch (error) {
     next(error);
@@ -117,7 +115,7 @@ const storeLogin = (req, res, next) => {
  * @param {*} next
  */
 
-const storeLogout = (req, res, next) => {
+const storeLogout = async (req, res, next) => {
   try {
   } catch (error) {
     next(error);
