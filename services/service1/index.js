@@ -5,17 +5,21 @@ const connectMongoDB = require("./src/models/connect");
 
 const PORT = APP_CONFIG.PORT || 8001;
 
-app.listen(PORT, async () => {
+const init = async () => {
   try {
     await connectMongoDB();
 
-    console.log("====================================");
-    console.log(
-      "Server is running on: " + clc.green(`http://localhost:${PORT}`)
-    );
-    console.log("====================================");
+    app.listen(PORT, () => {
+      console.log("====================================");
+      console.log(
+        "Server is running on: " + clc.green(`http://localhost:${PORT}`)
+      );
+      console.log("====================================");
+    });
   } catch (error) {
     console.error(error);
     process.exit(1);
   }
-});
+};
+
+init();
