@@ -19,6 +19,10 @@
 
 ![image design](./images/queues.png)
 
+- Event-driven queues design
+
+![image design](./images/overall-queues.png)
+
 ## 1.2. Details for IKEAR system
 
 ### 1.2.1. Customer Authentication, User management and Store management
@@ -38,3 +42,5 @@
 ![image design](./images/service-4.png)
 
 ### 1.2.5. Delivery and Logistics
+
+![image design](./images/service-5.png)

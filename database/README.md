@@ -224,7 +224,8 @@ Table review {
 ```text
 Table orders {
   id ObjectId
-  user ObjectId
+  user ObjectId [ref: - user.id]
+  store ObjectId
   status String
   date Date
   total_amount Number
@@ -234,7 +235,7 @@ Table orders {
 Table OrderItems{
   id ObjectId
   item ObjectId
-  inventory ObjectId [ref: inventory.id]
+  inventory ObjectId [ref: - inventory.id]
   order ObjectId [ref: > orders.id]
   quantity Number
   price Number
@@ -242,6 +243,7 @@ Table OrderItems{
 
 Table payments {
   id ObjectId
+  user ObjectId [ref: - user.id]
   order ObjectId [ref: - orders.id]
   status String
   amount Number
@@ -253,6 +255,16 @@ Table inventory {
   item ObjectId
   store ObjectId
   quantity Number
+}
+
+Table user {
+  id ObjectId
+  username String
+  phone String
+  email String
+  country String
+  city String
+  address String
 }
 ```
 
