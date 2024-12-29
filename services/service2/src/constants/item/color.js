@@ -1,15 +1,15 @@
 const COLORS = {
-  RED: "Red",
-  BLUE: "Blue",
-  GREEN: "Green",
-  YELLOW: "Yellow",
-  BLACK: "Black",
-  WHITE: "White",
-  ORANGE: "Orange",
-  PURPLE: "Purple",
-  PINK: "Pink",
-  BROWN: "Brown",
-  GRAY: "Gray",
+  RED: "red",
+  BLUE: "blue",
+  GREEN: "green",
+  YELLOW: "yellow",
+  BLACK: "black",
+  WHITE: "white",
+  ORANGE: "orange",
+  PURPLE: "purple",
+  PINK: "pink",
+  BROWN: "brown",
+  GRAY: "gray",
 };
 
 module.exports = COLORS;
