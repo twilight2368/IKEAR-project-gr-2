@@ -4,12 +4,12 @@ const FavSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      require: true,
+      required: true,
       ref: "user",
     },
     item: {
       type: mongoose.Schema.Types.ObjectId,
-      require: true,
+      required: true,
       ref: "item",
     },
   },

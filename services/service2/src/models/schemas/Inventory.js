@@ -5,17 +5,17 @@ const InventorySchema = new mongoose.Schema(
     store: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "store",
-      require: true,
+      required: true,
     },
     item: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "item",
-      require: true,
+      required: true,
     },
     quantity: {
       type: Number,
       min: 0,
-      require: true,
+      required: true,
       default: 0,
     },
   },
