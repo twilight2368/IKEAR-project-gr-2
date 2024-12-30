@@ -230,24 +230,16 @@ Table orders {
   date Date
   total_amount Number
   total_items Number
+  delivery_type String
 }
 
 Table OrderItems{
   id ObjectId
   item ObjectId
-  inventory ObjectId [ref: - inventory.id]
+  inventory ObjectId [ref: > inventory.id]
   order ObjectId [ref: > orders.id]
   quantity Number
   price Number
-}
-
-Table payments {
-  id ObjectId
-  user ObjectId [ref: - user.id]
-  order ObjectId [ref: - orders.id]
-  status String
-  amount Number
-  date Date
 }
 
 Table inventory {
