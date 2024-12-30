@@ -1,30 +1,31 @@
 const mongoose = require("mongoose");
 
-const ItemSchema = new mongoose.Schema(
+const UserSchema = new mongoose.Schema(
   {
-    name: {
+    username: {
       type: String,
       required: true,
     },
-    description: {
+    phone: {
       type: String,
       required: true,
     },
-    short_description: {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    country: {
       type: String,
       required: true,
     },
-    price: {
-      type: Number,
+    city: {
+      type: String,
       required: true,
     },
-    color: {
+    address: {
       type: String,
-      required: false,
-    },
-    size: {
-      type: String,
-      required: false,
+      required: true,
     },
   },
   {
@@ -32,6 +33,6 @@ const ItemSchema = new mongoose.Schema(
   }
 );
 
-const ItemModel = mongoose.model("item", ItemSchema);
+const UserModel = mongoose.model("user", UserSchema);
 
-module.exports = ItemModel;
+module.exports = UserModel;

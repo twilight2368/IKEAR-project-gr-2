@@ -4,12 +4,10 @@ const InventorySchema = new mongoose.Schema(
   {
     store: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "store",
       required: true,
     },
     item: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "item",
       required: true,
     },
     quantity: {
