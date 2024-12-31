@@ -1,5 +1,10 @@
 const express = require("express");
 const morgan = require("morgan");
+const errorHandling = require("./middlewares/errorHandling");
+
+const inventoryRoutes = require("./routes/inventory.routes");
+const itemRoutes = require("./routes/item.routes");
+const otherRoutes = require("./routes/other.routes");
 
 const app = express();
 
@@ -14,4 +19,9 @@ app.get("/", (req, res) => {
   });
 });
 
+app.use("/inventory", inventoryRoutes);
+app.use("/item", itemRoutes);
+app.use("/other", otherRoutes);
+
+app.use(errorHandling);
 module.exports = app;
