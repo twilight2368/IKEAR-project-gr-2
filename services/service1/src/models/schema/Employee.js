@@ -16,7 +16,6 @@ const EmployeeSchema = new mongoose.Schema(
     store: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "store",
-      required: true,
     },
     name: {
       type: String,
