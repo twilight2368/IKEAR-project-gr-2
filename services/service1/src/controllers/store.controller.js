@@ -119,6 +119,13 @@ const updateStore = async (req, res, next) => {
       weekendOpen,
       weekendClose,
     });
+
+    const newStoreInfo = await StoreModel.findById(id);
+
+    res.json({
+      message: "Update store successful",
+      data: newStoreInfo,
+    });
   } catch (error) {
     next(error);
   }
@@ -126,6 +133,13 @@ const updateStore = async (req, res, next) => {
 
 const deleteStore = async (req, res, next) => {
   try {
+    const { id } = req.params;
+
+    await StoreModel.findByIdAndDelete(id);
+
+    res.json({
+      message: "Delete successful",
+    });
   } catch (error) {
     next(error);
   }
