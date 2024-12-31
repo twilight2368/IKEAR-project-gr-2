@@ -3,12 +3,9 @@ const {
   userRegister,
   userLogin,
   userLogout,
-  adminRegister,
-  adminLogin,
-  adminLogout,
-  storeRegister,
-  storeLogin,
-  storeLogout,
+  employeeRegister,
+  employeeLogin,
+  employeeLogout,
 } = require("../controllers/auth.controller");
 const router = express.Router();
 
@@ -26,12 +23,10 @@ router.post("/login", userLogin);
 
 router.get("/logout", userLogout);
 
-//TODO: Employees authentication routes
+router.post("/employee-register", employeeRegister);
 
-router.post("/store-register", storeRegister);
+router.post("/employee-login", employeeLogin);
 
-router.post("/store-login", storeLogin);
-
-router.get("/store-logout", storeLogout);
+router.get("/employee-logout", employeeLogout);
 
 module.exports = router;
