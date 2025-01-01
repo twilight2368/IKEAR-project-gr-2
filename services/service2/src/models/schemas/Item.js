@@ -38,7 +38,7 @@ const ItemSchema = new mongoose.Schema(
     color: {
       type: String,
       required: false,
-      enum: Object.values(COLORS),
+      enum: Object.values(SIZES),
     },
     size: {
       type: String,
