@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const DELIVERY_TYPE = require("../constants/deliveryType");
+
 const OrderToItem = new mongoose.Schema({
   item: {
     type: mongoose.Schema.Types.ObjectId,
@@ -34,10 +36,6 @@ const OrderSchema = new mongoose.Schema({
   status: {
     type: String,
     required: true,
-    update_at: {
-      type: Date,
-      default: Date.now,
-    },
   },
   date: {
     type: Date,
@@ -57,7 +55,8 @@ const OrderSchema = new mongoose.Schema({
   item_inventory: [OrderToItem],
   delivery_type: {
     type: String,
-    require: true,
+    required: true,
+    enum: Object.values(DELIVERY_TYPE),
   },
 });
 
