@@ -5,6 +5,8 @@ import NotFoundPage from "./pages/NotFoundPage";
 import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import LoginPage from "./pages/auth/LoginPage";
+import AdminRoutes from "./routes/AdminRoutes";
+import StoreRoutes from "./routes/StoreRoutes";
 
 function App() {
   return (
@@ -14,8 +16,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/admin/*" element={<>Admin</>} />
-          <Route path="/store/*" element={<>Store</>} />
+          <Route path="/admin/*" element={<AdminRoutes />} />
+          <Route path="/store/*" element={<StoreRoutes />} />
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
