@@ -1,10 +1,14 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
-
+import LogoImage from "../assets/icons/polar-bear.svg";
+import Profile from "../components/Profile";
 export default function AdminLayout() {
   return (
-    <div>
-      <div className="w-full h-20 bg-black text-white flex flex-row">
+    <div className="bg-gray-50 p-2 pt-1">
+      <div className="w-full h-20 bg-black rounded-lg  shadow-lg mb-6 mt-2 shadow-gray-400 text-white flex flex-row justify-between">
+        <div className="w-1/12 h-full  rounded-l-lg  p-3 flex justify-center items-center bg-white">
+          <img src={LogoImage} alt="LOGO" className="h-full aspect-square" />
+        </div>
         <div className="w-2/3 h-full flex flex-row items-center px-12 gap-12">
           <NavLink
             to="/admin"
@@ -56,7 +60,9 @@ export default function AdminLayout() {
             Items
           </NavLink>
         </div>
-        <div className="w-1/3">1</div>
+        <div className="w-3/12">
+          <Profile />
+        </div>
       </div>
       <div>
         <Outlet />
