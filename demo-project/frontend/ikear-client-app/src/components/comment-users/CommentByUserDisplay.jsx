@@ -28,20 +28,6 @@ export default function CommentByUserDisplay() {
           expedita sapiente nobis asperiores!
         </p>
       </div>
-      <div className="w-full h-12 flex flex-row">
-        <div className="w-1/12 h-full flex justify-center items-center ">
-          <FaReply className=" rotate-180" />
-        </div>
-        <div className=" w-11/12 h-full line-clamp-3 text-xs text-gray-600">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum
-          aliquam maiores dolore fuga nihil velit magni illo incidunt laborum
-          earum doloremque, dolor quos nisi corrupti cum! Soluta quod cupiditate
-          voluptatibus! Lorem ipsum dolor sit amet consectetur, adipisicing
-          elit. Corporis vel in fugiat dolore, tempore explicabo, magni ipsam
-          maiores laboriosam iure atque, nam possimus quaerat. Dolore illo
-          expedita sapiente nobis asperiores!
-        </div>
-      </div>
     </div>
   );
 }

@@ -17,6 +17,9 @@ import ItemDetailsPage from "./pages/ItemDetails/ItemDetailsPage";
 import StoreDetail from "./pages/store-detail/StoreDetail";
 import FavListPage from "./pages/fav-list/FavListPage";
 import CartPage from "./pages/cart/CartPage";
+import PaymentPage from "./pages/payment/PaymentPage";
+import OrderPage from "./pages/order/OrderPage";
+import ProfilePage from "./pages/profile/ProfilePage";
 
 function App() {
   return (
@@ -45,11 +48,12 @@ function App() {
             <Route path="item-detail/:id" element={<ItemDetailsPage />} />
             <Route path="search" element={<></>} />
           </Route>
-          <Route path="/purchase" element={<></>} />
+          <Route path="/purchase" element={<PaymentPage />} />
           <Route path="/fav-list" element={<FavListPage />} />
           <Route path="/my-cart" element={<CartPage />} />
-          <Route path="/confirm-purchase" element={<></>} />
+          <Route path="/my-info" element={<ProfilePage />} />
           <Route path="/store-detail/:id" element={<StoreDetail />} />
+          <Route path="/my-orders" element={<OrderPage />} />
         </Route>
         <Route path="*" element={<>Not found</>} />
       </Routes>
