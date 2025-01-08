@@ -92,7 +92,7 @@ export default function RegisterPage() {
           </Select>
           <Select
             label="Store"
-            value={formData.store}
+            defaultValue={formData.store}
             onChange={(value) =>
               setFormData((prev) => ({ ...prev, store: value }))
             }
