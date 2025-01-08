@@ -2,8 +2,10 @@ import React from "react";
 import ItemInCart from "../../components/items/ItemInCart";
 import { Footer } from "../../components/footer/Footer";
 import { Button, Option, Select } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 
 export default function CartPage() {
+  const navigate = useNavigate();
   return (
     <div className="w-full">
       <div className=" p-6 pt-12 ">
@@ -47,7 +49,13 @@ export default function CartPage() {
             </div>
           </div>
           <div className=" w-1/6 h-full flex justify-center items-center">
-            <Button color="gray" className=" bg-black text-white">
+            <Button
+              color="gray"
+              className=" bg-black text-white"
+              onClick={() => {
+                navigate("/purchase");
+              }}
+            >
               {" "}
               Purchase
             </Button>
@@ -55,7 +63,7 @@ export default function CartPage() {
         </div>
       </div>
       <div className="w-full min-h-screen p-12 flex justify-center">
-        <div className="w-4/5 grid grid-cols-2 gap-12">
+        <div className="w-4/5 grid grid-cols-1 gap-12">
           <ItemInCart />
           <ItemInCart />
           <ItemInCart />

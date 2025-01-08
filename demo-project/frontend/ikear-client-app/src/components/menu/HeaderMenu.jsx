@@ -56,17 +56,27 @@ export default function HeaderMenu() {
             {!false ? (
               <>
                 <div className="w-full flex flex-col gap-2">
-                  <MenuItem className="flex flex-row gap-2 items-center">
+                  <MenuItem
+                    className="flex flex-row gap-2 items-center"
+                    onClick={() => {
+                      navigate("/my-info");
+                    }}
+                  >
                     <span>
                       <FaAddressCard />
                     </span>
                     <span> Your information</span>
                   </MenuItem>
-                  <MenuItem className=" flex flex-row gap-2 items-start">
+                  <MenuItem
+                    className=" flex flex-row gap-2 items-start"
+                    onClick={() => {
+                      navigate("/my-orders");
+                    }}
+                  >
                     <span>
                       <FaHistory />
                     </span>
-                    <span> Purchase history</span>
+                    <span> My order</span>
                   </MenuItem>
 
                   <Button

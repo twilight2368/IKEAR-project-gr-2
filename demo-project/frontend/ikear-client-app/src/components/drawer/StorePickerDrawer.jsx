@@ -26,7 +26,7 @@ export default function StorePickerDrawer() {
         placement="right"
         size={600}
         color="gray"
-        className=" border-black border-l-2 shadow-md shadow-black z-[100]"
+        className=" border-black border-l-2 shadow-md shadow-black z-[1000]"
       >
         <StoreDrawerContent onClose={closeDrawer} />
       </Drawer>
