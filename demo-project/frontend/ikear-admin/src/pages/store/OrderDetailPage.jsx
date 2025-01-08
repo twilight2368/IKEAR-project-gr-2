@@ -1,7 +1,7 @@
 import React from "react";
 import UserCard from "../../components/admin/UserCard";
 import OrderItemCard from "../../components/store/OrderItemCard";
-import { Button, Card, CardBody } from "@material-tailwind/react";
+import { Button, Card, CardBody, Chip } from "@material-tailwind/react";
 import { useParams } from "react-router-dom";
 
 export default function OrderDetailPage() {
@@ -18,11 +18,14 @@ export default function OrderDetailPage() {
       <div className="my-12 px-12 flex flex-row gap-0">
         <div className="w-1/2">
           <Card>
-            <CardBody>
+            <CardBody className=" flex flex-col gap-2">
               <div>Date: 00-00-00 hh:mm:ss</div>
               <div>Total item:</div>
               <div>Total amount:</div>
               <div>Delivery type: </div>
+              <div className=" flex justify-end items-center">
+                <Chip  value="Status" className="w-fit" />
+              </div>
             </CardBody>
           </Card>
         </div>
