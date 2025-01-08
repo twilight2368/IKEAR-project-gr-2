@@ -1,30 +1,15 @@
 import "../style.css";
 
-import CategoryRoomBG_Bedroom from "../../assets/images/rooms/PH199464.avif";
-import CategoryRoomBG_Kitchen from "../../assets/images/rooms/PH196224.avif";
-import CategoryRoomBG_Living_room from "../../assets/images/rooms/PH199061.avif";
-import CategoryRoomBG_Dining_room from "../../assets/images/rooms/PH200257_SHI_001.avif";
-import CategoryRoomBG_Children_room from "../../assets/images/rooms/PH199501.avif";
-import CategoryRoomBG_Bath_room from "../../assets/images/rooms/PH199528.avif";
-import CategoryRoomBG__Office_room from "../../assets/images/rooms/a-dog-stands-by-a-woman-at-a-fryksas-rattan-desk-in-a-living-988573325dbe599c7f1cbc4078fe189d.avif";
-import CategoryRoomBG_Study_room from "../../assets/images/rooms/a-girl-sitting-on-a-green-desk-chair-doing-her-homework-on-a-8fc9000c5e2ae81536abb3e933122a36.avif";
-import CategoryRoomBG_Gaming_room from "../../assets/images/rooms/ME-DDTAHFY24-Attract-KV-02_Bedroom_Grandfather_Gamer_CMYK.avif";
-import CategoryRoomBG_Garden from "../../assets/images/rooms/an-outdoor-space-with-a-white-beige-bondholmen-table-and-sev-6addab668fa66c61f836c14a84f5a300.avif";
-import CategoryRoomBG_Hallway from "../../assets/images/rooms/PH199354.avif";
-import CategoryRoomBG_Laundry_room from "../../assets/images/rooms/a-yellow-tiled-laundry-room-with-a-white-nysjoen-cabinet-a-w-9e95bad7aad891b80136b497ba670a01.avif";
-import CategoryRoomBG_garage from "../../assets/images/rooms/PH175726.avif";
-
 import { TiShoppingCart } from "react-icons/ti";
 import { Button, IconButton } from "@material-tailwind/react";
-import { BiCategory } from "react-icons/bi";
 import ItemCard from "../../components/items/ItemCard";
-import ImageTest from "../../assets/images/polar-bear.png";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import ItemCategoryRoom from "../../components/items/ItemCategoryRoom";
 import { useRef } from "react";
 import ItemCategoryProduct from "../../components/items/ItemCategoryProduct";
 import { Footer } from "../../components/footer/Footer";
 import { useNavigate } from "react-router-dom";
+
 export default function LandingPage() {
   const category_ref = useRef();
   const navigate = useNavigate();
@@ -88,7 +73,7 @@ export default function LandingPage() {
         <div className="w-full flex flex-row gap-0 h-60 relative">
           <div className=" w-1/6 aspect-square">
             <div className="w-full h-full relative categories-landing-page">
-              <div className="absolute h-full w-full bg-black/20">
+              <div className="absolute h-full w-full bg-black">
                 <div className="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 text-white ">
                   <span>Shop by room</span>
                 </div>
@@ -132,82 +117,43 @@ export default function LandingPage() {
               ref={category_ref}
             >
               <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom
-                  image_display={CategoryRoomBG_Living_room}
-                  label={"Living room"}
-                />
+                <ItemCategoryRoom label={"Living room"} />
               </div>
               <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom
-                  image_display={CategoryRoomBG_Bedroom}
-                  label={"Bedroom"}
-                />
+                <ItemCategoryRoom label={"Bedroom"} />
               </div>
               <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom
-                  image_display={CategoryRoomBG_Bath_room}
-                  label={"Bathroom"}
-                />
+                <ItemCategoryRoom label={"Bathroom"} />
               </div>
               <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom
-                  image_display={CategoryRoomBG_Kitchen}
-                  label={"Kitchen"}
-                />
+                <ItemCategoryRoom label={"Kitchen"} />
               </div>
               <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom
-                  image_display={CategoryRoomBG_Dining_room}
-                  label={"Dining room"}
-                />
+                <ItemCategoryRoom label={"Dining room"} />
               </div>
               <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom
-                  image_display={CategoryRoomBG_Children_room}
-                  label={"Children room"}
-                />
+                <ItemCategoryRoom label={"Children room"} />
               </div>
               <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom
-                  image_display={CategoryRoomBG_Study_room}
-                  label={"Study room"}
-                />
+                <ItemCategoryRoom label={"Study room"} />
               </div>
               <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom
-                  image_display={CategoryRoomBG__Office_room}
-                  label={"Office"}
-                />
+                <ItemCategoryRoom label={"Office"} />
               </div>
               <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom
-                  image_display={CategoryRoomBG_Gaming_room}
-                  label={"Gaming room"}
-                />
+                <ItemCategoryRoom label={"Gaming room"} />
               </div>
               <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom
-                  image_display={CategoryRoomBG_Hallway}
-                  label={"Hallway"}
-                />
+                <ItemCategoryRoom label={"Hallway"} />
               </div>
               <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom
-                  image_display={CategoryRoomBG_Laundry_room}
-                  label={"Laundry room"}
-                />
+                <ItemCategoryRoom label={"Laundry room"} />
               </div>
               <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom
-                  image_display={CategoryRoomBG_Garden}
-                  label={"Garden"}
-                />
+                <ItemCategoryRoom label={"Garden"} />
               </div>
               <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom
-                  image_display={CategoryRoomBG_garage}
-                  label={"Garage"}
-                />
+                <ItemCategoryRoom label={"Garage"} />
               </div>
             </div>
           </div>

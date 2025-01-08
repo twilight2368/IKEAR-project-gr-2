@@ -1,7 +1,7 @@
 import React from "react";
 import ItemInCart from "../../components/items/ItemInCart";
 import { Footer } from "../../components/footer/Footer";
-import { Button } from "@material-tailwind/react";
+import { Button, Option, Select } from "@material-tailwind/react";
 
 export default function CartPage() {
   return (
@@ -14,9 +14,9 @@ export default function CartPage() {
           When you add products to your shopping bag, they will appear here.
         </div>
       </div>
-      <div className=" sticky top-0 z-[1] h-32 bg-white border-b-2  border-black ">
+      <div className=" sticky top-0 z-[1] pb-6 h-32 bg-white border-b-2  border-black ">
         <div className="w-full h-full flex flex-row">
-          <div className=" w-4/6 px-24 flex flex-col justify-center">
+          <div className=" w-4/6 px-24 flex flex-col gap-3 justify-center">
             <li>
               <span>Total products: </span>
               <span>0</span>
@@ -25,6 +25,18 @@ export default function CartPage() {
               <span>Total items: </span>
               <span>0</span>
             </li>
+
+            <div className=" flex flex-row justify-start items-center">
+              <div className=" text-sm w-2/12">Choose store</div>
+              <div className=" w-10/12">
+                <Select size="md" color="gray" label="Store">
+                  <Option className="mb-2">1231 street, city, country</Option>
+                  <Option className="mb-2">1232 street, city, country</Option>
+                  <Option className="mb-2">1233 street, city, country</Option>
+                  <Option className="mb-2">1234 street, city, country</Option>
+                </Select>
+              </div>
+            </div>
           </div>
           <div className=" w-1/6 h-full flex justify-center items-center">
             <div className=" w-full h-full flex flex-col justify-center items-start">
@@ -35,15 +47,17 @@ export default function CartPage() {
             </div>
           </div>
           <div className=" w-1/6 h-full flex justify-center items-center">
-            <Button color="gray" className=" bg-black text-white"> Purchase</Button>
+            <Button color="gray" className=" bg-black text-white">
+              {" "}
+              Purchase
+            </Button>
           </div>
         </div>
       </div>
       <div className="w-full min-h-screen p-12 flex justify-center">
-        <div className="w-4/5 flex flex-col gap-6">
+        <div className="w-4/5 grid grid-cols-2 gap-12">
           <ItemInCart />
           <ItemInCart />
-
           <ItemInCart />
           <ItemInCart />
           <ItemInCart />

@@ -1,17 +1,4 @@
 import BearHeadingImage from "../../assets/images/animals-nature-bears-ice-wallpaper-cb360c3d33c1cf69e5f44b89dddcbc50.jpg";
-import CategoryRoomBG_Bedroom from "../../assets/images/rooms/PH199464.avif";
-import CategoryRoomBG_Kitchen from "../../assets/images/rooms/PH196224.avif";
-import CategoryRoomBG_Living_room from "../../assets/images/rooms/PH199061.avif";
-import CategoryRoomBG_Dining_room from "../../assets/images/rooms/PH200257_SHI_001.avif";
-import CategoryRoomBG_Children_room from "../../assets/images/rooms/PH199501.avif";
-import CategoryRoomBG_Bath_room from "../../assets/images/rooms/PH199528.avif";
-import CategoryRoomBG__Office_room from "../../assets/images/rooms/a-dog-stands-by-a-woman-at-a-fryksas-rattan-desk-in-a-living-988573325dbe599c7f1cbc4078fe189d.avif";
-import CategoryRoomBG_Study_room from "../../assets/images/rooms/a-girl-sitting-on-a-green-desk-chair-doing-her-homework-on-a-8fc9000c5e2ae81536abb3e933122a36.avif";
-import CategoryRoomBG_Gaming_room from "../../assets/images/rooms/ME-DDTAHFY24-Attract-KV-02_Bedroom_Grandfather_Gamer_CMYK.avif";
-import CategoryRoomBG_Garden from "../../assets/images/rooms/an-outdoor-space-with-a-white-beige-bondholmen-table-and-sev-6addab668fa66c61f836c14a84f5a300.avif";
-import CategoryRoomBG_Hallway from "../../assets/images/rooms/PH199354.avif";
-import CategoryRoomBG_Laundry_room from "../../assets/images/rooms/a-yellow-tiled-laundry-room-with-a-white-nysjoen-cabinet-a-w-9e95bad7aad891b80136b497ba670a01.avif";
-import CategoryRoomBG_garage from "../../assets/images/rooms/PH175726.avif";
 
 import ItemCategoryRoom2 from "../../components/items/ItemCategoryRoom2";
 
@@ -38,70 +25,31 @@ export default function StoreAllRoomPage() {
           <h2 className=" text-3xl font-bold">All rooms</h2>
         </div>
         <div className="w-full grid grid-cols-3 gap-6 p-6">
-          <ItemCategoryRoom2
-            image_display={CategoryRoomBG_Living_room}
-            label={"Living room"}
-          />
+          <ItemCategoryRoom2 label={"Living room"} />
 
-          <ItemCategoryRoom2
-            image_display={CategoryRoomBG_Bedroom}
-            label={"Bedroom"}
-          />
+          <ItemCategoryRoom2 label={"Bedroom"} />
 
-          <ItemCategoryRoom2
-            image_display={CategoryRoomBG_Bath_room}
-            label={"Bathroom"}
-          />
+          <ItemCategoryRoom2 label={"Bathroom"} />
 
-          <ItemCategoryRoom2
-            image_display={CategoryRoomBG_Kitchen}
-            label={"Kitchen"}
-          />
+          <ItemCategoryRoom2 label={"Kitchen"} />
 
-          <ItemCategoryRoom2
-            image_display={CategoryRoomBG_Dining_room}
-            label={"Dining room"}
-          />
+          <ItemCategoryRoom2 label={"Dining room"} />
 
-          <ItemCategoryRoom2
-            image_display={CategoryRoomBG_Children_room}
-            label={"Children room"}
-          />
+          <ItemCategoryRoom2 label={"Children room"} />
 
-          <ItemCategoryRoom2
-            image_display={CategoryRoomBG_Study_room}
-            label={"Study room"}
-          />
+          <ItemCategoryRoom2 label={"Study room"} />
 
-          <ItemCategoryRoom2
-            image_display={CategoryRoomBG__Office_room}
-            label={"Office"}
-          />
+          <ItemCategoryRoom2 label={"Office"} />
 
-          <ItemCategoryRoom2
-            image_display={CategoryRoomBG_Gaming_room}
-            label={"Gaming room"}
-          />
+          <ItemCategoryRoom2 label={"Gaming room"} />
 
-          <ItemCategoryRoom2
-            image_display={CategoryRoomBG_Hallway}
-            label={"Hallway"}
-          />
+          <ItemCategoryRoom2 label={"Hallway"} />
 
-          <ItemCategoryRoom2
-            image_display={CategoryRoomBG_Laundry_room}
-            label={"Laundry room"}
-          />
+          <ItemCategoryRoom2 label={"Laundry room"} />
 
-          <ItemCategoryRoom2
-            image_display={CategoryRoomBG_Garden}
-            label={"Garden"}
-          />
+          <ItemCategoryRoom2 label={"Garden"} />
 
-          <ItemCategoryRoom2
-            image_display={CategoryRoomBG_garage}
-            label={"Garage"}
-          />
+          <ItemCategoryRoom2 label={"Garage"} />
         </div>
       </div>
     </div>
