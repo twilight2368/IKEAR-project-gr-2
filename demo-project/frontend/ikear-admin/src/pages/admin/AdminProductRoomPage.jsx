@@ -6,7 +6,7 @@ import { Button } from "@material-tailwind/react";
 export default function AdminProductRoomPage() {
   return (
     <div className="w-full min-h-screen">
-      <div className=" flex flex-row gap-3 justify-end items-center">
+      <div className="px-6 flex flex-row gap-3 justify-end items-center">
         <Button> Add Room </Button>
         <Button> Add Products </Button>
       </div>
