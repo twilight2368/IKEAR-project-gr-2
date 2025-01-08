@@ -1,18 +1,11 @@
 import React from "react";
+import ImageProduct from "../../assets/icons/product-svgrepo-com.svg";
 import { useParams } from "react-router-dom";
 import { Carousel, IconButton, Rating } from "@material-tailwind/react";
-import {
-  FaStar,
-  FaRegStar,
-  FaRegHeart,
-  FaPenAlt,
-  FaRegCommentAlt,
-  FaStoreAlt,
-} from "react-icons/fa";
+import { FaStar, FaRegStar, FaRegHeart } from "react-icons/fa";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 import { FaCircleCheck } from "react-icons/fa6";
 import ItemCard from "../../components/items/ItemCard";
-import StoreItemAdressDisplay from "../../components/store-detail/StoreItemAdressDisplay";
 import StoreAvailableAddress from "../../components/store-detail/StoreAvailableAddress";
 import CommentByUserDisplay from "../../components/comment-users/CommentByUserDisplay";
 import CommentsItemDialog from "../../components/dialog/CommentsItemDialog";
@@ -25,17 +18,17 @@ export default function ItemDetailsPage() {
           <div className="w-full h-full">
             <Carousel className="w-full rounded-xl">
               <img
-                src="https://img.freepik.com/free-photo/mid-century-modern-living-room-interior-design-with-monstera-tree_53876-129805.jpg"
+                src={ImageProduct}
                 alt="image 1"
                 className=" w-full aspect-square object-contain"
               />
               <img
-                src="https://img.freepik.com/free-photo/mid-century-modern-living-room-interior-design-with-monstera-tree_53876-129805.jpg"
+                src={ImageProduct}
                 alt="image 2"
                 className="w-full aspect-square  object-contain"
               />
               <img
-                src="https://img.freepik.com/free-photo/mid-century-modern-living-room-interior-design-with-monstera-tree_53876-129805.jpg"
+                src={ImageProduct}
                 alt="image 3"
                 className="w-full aspect-square  object-contain"
               />

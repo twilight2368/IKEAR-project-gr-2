@@ -1,9 +1,9 @@
 import React from "react";
-
+import RoomLogo from "../../assets/icons/room-svgrepo-com.svg";
 import { Card, CardBody } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 
-export default function ItemCategoryRoom2({ image_display, label }) {
+export default function ItemCategoryRoom2({ label }) {
   const navigate = useNavigate();
   return (
     <Card
@@ -14,7 +14,7 @@ export default function ItemCategoryRoom2({ image_display, label }) {
     >
       <CardBody>
         <div className="w-full mb-3">
-          <img src={image_display} alt="" className=" rounded aspect-[16/10]" />
+          <img src={RoomLogo} alt="" className=" rounded aspect-[16/10]" />
         </div>
         <div className="text-center font-black text-black">
           <span>{label}</span>

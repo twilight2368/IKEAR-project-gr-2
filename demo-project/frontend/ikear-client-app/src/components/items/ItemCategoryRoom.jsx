@@ -1,6 +1,6 @@
-import ImageTest from "../../assets/images/polar-bear.png";
 import { useNavigate } from "react-router-dom";
-export default function ItemCategoryRoom({ image_display, label }) {
+import RoomLogo from "../../assets/icons/room-svgrepo-com.svg";
+export default function ItemCategoryRoom({ label }) {
   const navigate = useNavigate();
   return (
     <div
@@ -10,9 +10,9 @@ export default function ItemCategoryRoom({ image_display, label }) {
       }}
     >
       <div className=" h-full w-full flex justify-center items-center">
-        <img src={image_display} alt="image" className="h-full w-full " />
+        <img src={RoomLogo} alt="image" className="h-full " />
       </div>
-      <div className="absolute top-0 right-1/2 translate-x-1/2 z-[1]  h-full w-full bg-black/60 duration-100 opacity-50 hover:opacity-100  text-white flex justify-center items-center">
+      <div className="absolute top-0 right-1/2 translate-x-1/2 z-[1]  h-full w-full bg-black/85 duration-100 opacity-50 hover:opacity-100  text-white flex justify-center items-center">
         {label}
       </div>
     </div>
