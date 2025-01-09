@@ -4,9 +4,8 @@
   - [1.1. Customer Authentication, User management and Store management](#11-customer-authentication-user-management-and-store-management)
   - [1.2. Product Catalog Service and Inventory management](#12-product-catalog-service-and-inventory-management)
   - [1.3. Cart management, Favorite List and Review Management](#13-cart-management-favorite-list-and-review-management)
-  - [1.4. Order Management - Payment Processing](#14-order-management---payment-processing)
-  - [1.5. Delivery and Logistics](#15-delivery-and-logistics)
-  - [1.6 Asset containing service](#16-asset-containing-service)
+  - [1.4. Order Management - Payment Processing - Delivery and Logistics](#14-order-management---payment-processing---delivery-and-logistics)
+  - [1.5. Asset containing service](#15-asset-containing-service)
 
 ## 1.1. Customer Authentication, User management and Store management
 
@@ -212,7 +211,7 @@ Table review {
 }
 ```
 
-## 1.4. Order Management - Payment Processing
+## 1.4. Order Management - Payment Processing - Delivery and Logistics
 
 - Handles customer orders, updates, and tracking.
 - Handles secure payments, refunds, and invoicing
@@ -222,6 +221,7 @@ Table review {
 - Details:
 
 ```text
+
 Table orders {
   id ObjectId
   user ObjectId [ref: - user.id]
@@ -231,12 +231,14 @@ Table orders {
   total_amount Number
   total_items Number
   delivery_type String
+  delivery_status String
+  delivery_price Number
+  total_price Number
 }
 
 Table OrderItems{
   id ObjectId
-  item ObjectId
-  inventory ObjectId [ref: > inventory.id]
+  item ObjectId [ref: > items.id]
   order ObjectId [ref: > orders.id]
   quantity Number
   price Number
@@ -244,7 +246,7 @@ Table OrderItems{
 
 Table inventory {
   id ObjectId
-  item ObjectId
+  item ObjectId [ref: > items.id]
   store ObjectId
   quantity Number
 }
@@ -258,12 +260,19 @@ Table user {
   city String
   address String
 }
+
+Table items {
+  id ObjectId
+  name String
+  description String
+  short_description String
+  price Number
+  color String
+  size String
+  image Array
+}
 ```
 
-## 1.5. Delivery and Logistics
-
-- Manages shipping, delivery schedules, and tracking.
-
-## 1.6 Asset containing service
+## 1.5. Asset containing service
 
 - Contain images, assets from all service
