@@ -20,10 +20,10 @@ const StoreSchema = new mongoose.Schema(
       required: true,
     },
     longitude: {
-      type: String,
+      type: Number,
     },
     latitude: {
-      type: String,
+      type: Number,
     },
     city: {
       type: String,

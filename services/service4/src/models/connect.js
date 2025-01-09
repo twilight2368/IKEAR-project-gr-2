@@ -5,6 +5,7 @@ const DB_CONFIG = require("../configs/database.config");
 const User = require("./schemas/User");
 const Inventory = require("./schemas/Inventory");
 const Order = require("./schemas/Order");
+const Item = require("./schemas/Item");
 
 const CONNECT_STRING = DB_CONFIG.stringConnect;
 

@@ -50,9 +50,7 @@ export default function Login() {
                   </div>
                   <Input color="black" label="Username or email" />
                   <Input color="black" label="Password" type="password" />
-                  <div className="w-full h-3 text-xs text-red-400 text-center">
-                    Something went wrong!!!
-                  </div>
+                
                   <Button color="gray" className=" bg-black">
                     {" "}
                     Login{" "}

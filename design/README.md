@@ -6,8 +6,7 @@
     - [1.2.1. Customer Authentication, User management and Store management](#121-customer-authentication-user-management-and-store-management)
     - [1.2.2. Product Catalog Service and Inventory Management](#122-product-catalog-service-and-inventory-management)
     - [1.2.3. Cart management, Favorite List and Review Management](#123-cart-management-favorite-list-and-review-management)
-    - [1.2.4. Order Management - Payment Processing](#124-order-management---payment-processing)
-    - [1.2.5. Delivery and Logistics](#125-delivery-and-logistics)
+    - [1.2.4. Order Management - Payment Processing - Delivery and Logistics](#124-order-management---payment-processing---delivery-and-logistics)
 
 ## 1.1. Overview design
 
@@ -18,10 +17,6 @@
 - All queues needed for project
 
 ![image design](./images/queues.png)
-
-- Event-driven queues design
-
-![image design](./images/overall-queues.png)
 
 ## 1.2. Details for IKEAR system
 
@@ -37,10 +32,6 @@
 
 ![image design](./images/service-3.png)
 
-### 1.2.4. Order Management - Payment Processing
+### 1.2.4. Order Management - Payment Processing - Delivery and Logistics
 
 ![image design](./images/service-4.png)
-
-### 1.2.5. Delivery and Logistics
-
-![image design](./images/service-5.png)
