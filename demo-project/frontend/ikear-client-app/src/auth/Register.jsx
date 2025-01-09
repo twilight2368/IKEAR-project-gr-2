@@ -1,20 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   Card,
   CardBody,
   Input,
   Typography,
+  Select,
+  Option,
 } from "@material-tailwind/react";
 import LogoImage from "../assets/icons/polar-bear.svg";
 import ImageBgBear from "../assets/images/animals-bear-wallpaper-a910386d819a7dcba627b8ff0011d61d.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaHouse } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import axios from "axios";
 export default function Register() {
   const date = new Date();
-
+  const navigate = useNavigate();
+  const [countryList, setCountryList] = useState();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -26,6 +29,21 @@ export default function Register() {
     address: "",
   });
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/service1/other/country")
+      .then((response) => {
+        setCountryList(response.data.data);
+      })
+      .catch((error) => {
+        console.error("Registration error:", error);
+        toast.error(
+          error.response?.data?.message ||
+            "An error occurred during registration."
+        );
+      });
+  }, []);
+
   // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -34,25 +52,58 @@ export default function Register() {
 
   // API call for registration
   const handleRegister = async () => {
+    console.log("====================================");
+    console.log(formData);
+    console.log("====================================");
+
+    const {
+      username,
+      email,
+      password,
+      confirmPassword,
+      phone,
+      country,
+      city,
+      address,
+    } = formData;
+
+    if (
+      !username ||
+      !email ||
+      !password ||
+      !confirmPassword ||
+      !phone ||
+      !country ||
+      !city ||
+      !address
+    ) {
+      toast.error("All fields are required!");
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match!");
       return;
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/service1/register", {
-        username: formData.username,
-        email: formData.email,
-        password: formData.password,
-        phone: formData.phone,
-        country: formData.country,
-        city: formData.city,
-        address: formData.address,
-      });
+      const response = await axios.post(
+        "http://localhost:5000/service1/auth/register",
+        {
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+          phone: formData.phone,
+          country: formData.country,
+          city: formData.city,
+          address: formData.address,
+        }
+      );
 
       if (response.status === 201) {
         toast.success("Registration successful!");
         // Redirect or perform any additional action here
+        navigate("/login");
       }
     } catch (error) {
       console.error("Registration error:", error);
@@ -150,13 +201,37 @@ export default function Register() {
                       />
                     </div>
                     <div className="col-span-2">
-                      <Input
-                        color="black"
-                        label="Country"
-                        name="country"
-                        value={formData.country}
-                        onChange={handleInputChange}
-                      />
+                      <div className="col-span-2">
+                        {countryList && countryList.length ? (
+                          <>
+                            {" "}
+                            <Select
+                              color="gray"
+                              label="Select a country"
+                              value={formData.country}
+                              onChange={(value) =>
+                                setFormData({ ...formData, country: value })
+                              }
+                            >
+                              {countryList?.map((country, index) => (
+                                <Option key={index} value={country}>
+                                  {country}
+                                </Option>
+                              ))}
+                            </Select>
+                          </>
+                        ) : (
+                          <>
+                            <Input
+                              color="black"
+                              label="Country"
+                              name="country"
+                              value={formData.country}
+                              onChange={handleInputChange}
+                            />
+                          </>
+                        )}
+                      </div>
                     </div>
                     <div className="col-start-3 col-end-6">
                       <Input
@@ -198,7 +273,7 @@ export default function Register() {
                     </span>
                   </div>
                   <div className="">
-                    <hr className="my-1 border-blue-gray-50" />
+                    <hr className="my-3 border-blue-gray-50" />
                     <Typography
                       color="blue-gray"
                       className="text-center text-xs font-normal"

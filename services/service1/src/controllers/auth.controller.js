@@ -22,7 +22,7 @@ const userRegister = async (req, res, next) => {
 
     if (user) {
       return res.status(403).json({
-        message: "User already exists",
+        message: "User's email already exists",
       });
     }
 
@@ -44,7 +44,7 @@ const userRegister = async (req, res, next) => {
 
     await newUser.save();
 
-    res.json({
+    res.status(201).json({
       message: "User register successful",
       user: newUser,
     });
@@ -79,9 +79,12 @@ const userLogin = async (req, res, next) => {
       });
     }
 
+    const userWithoutPassword = user.toObject();
+    delete userWithoutPassword.password;
+
     res.json({
       message: "Login successful",
-      user: user,
+      user: userWithoutPassword,
     });
   } catch (error) {
     next(error);
