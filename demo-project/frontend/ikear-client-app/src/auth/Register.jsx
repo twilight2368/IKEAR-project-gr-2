@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Button,
   Card,
@@ -9,8 +10,59 @@ import LogoImage from "../assets/icons/polar-bear.svg";
 import ImageBgBear from "../assets/images/animals-bear-wallpaper-a910386d819a7dcba627b8ff0011d61d.jpg";
 import { Link } from "react-router-dom";
 import { FaHouse } from "react-icons/fa6";
+import { toast } from "react-toastify";
+import axios from "axios";
 export default function Register() {
   const date = new Date();
+
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phone: "",
+    country: "",
+    city: "",
+    address: "",
+  });
+
+  // Handle form input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // API call for registration
+  const handleRegister = async () => {
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("Passwords do not match!");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:5000/service1/register", {
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+        phone: formData.phone,
+        country: formData.country,
+        city: formData.city,
+        address: formData.address,
+      });
+
+      if (response.status === 201) {
+        toast.success("Registration successful!");
+        // Redirect or perform any additional action here
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+      toast.error(
+        error.response?.data?.message ||
+          "An error occurred during registration."
+      );
+    }
+  };
+
   return (
     <div className="relative w-full h-screen">
       <div className="absolute top-3 right-3 z-10">
@@ -49,41 +101,88 @@ export default function Register() {
                     </h2>
                   </div>
                   <div className="grid grid-cols-5 gap-3">
-                    <div className=" col-span-2">
-                      <Input color="black" label="Username" />
+                    <div className="col-span-2">
+                      <Input
+                        color="black"
+                        label="Username"
+                        name="username"
+                        value={formData.username}
+                        onChange={handleInputChange}
+                      />
                     </div>
-                    <div className=" col-start-3 col-end-6">
-                      <Input color="black" label="Email" />
+                    <div className="col-start-3 col-end-6">
+                      <Input
+                        color="black"
+                        label="Email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                      />
                     </div>
                     <div className="w-full col-span-5">
-                      <Input color="black" label="Password" type="password" />
+                      <Input
+                        color="black"
+                        label="Password"
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                      />
                     </div>
                     <div className="w-full col-span-5">
                       <Input
                         color="black"
                         label="Confirm password"
                         type="password"
+                        name="confirmPassword"
+                        value={formData.confirmPassword}
+                        onChange={handleInputChange}
                       />
                     </div>
                     <div className="w-full col-span-5">
-                      <Input color="black" label="Phone number" type="Phone" />
+                      <Input
+                        color="black"
+                        label="Phone number"
+                        type="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                      />
                     </div>
-                    <div className=" col-span-2">
-                      <Input color="black" label="Country" />
+                    <div className="col-span-2">
+                      <Input
+                        color="black"
+                        label="Country"
+                        name="country"
+                        value={formData.country}
+                        onChange={handleInputChange}
+                      />
                     </div>
-                    <div className=" col-start-3 col-end-6">
-                      <Input color="black" label="City" />
+                    <div className="col-start-3 col-end-6">
+                      <Input
+                        color="black"
+                        label="City"
+                        name="city"
+                        value={formData.city}
+                        onChange={handleInputChange}
+                      />
                     </div>
                     <div className="col-span-5">
-                      <Input color="black" label="Address" />
+                      <Input
+                        color="black"
+                        label="Address"
+                        name="address"
+                        value={formData.address}
+                        onChange={handleInputChange}
+                      />
                     </div>
                   </div>
-                  <div className="w-full h-3 text-xs text-red-400 text-center">
-                    Something went wrong!!!
-                  </div>
                   <div className="w-full flex justify-center items-center">
-                    <Button className="w-1/2 bg-black" color="gray">
-                      {" "}
+                    <Button
+                      className="w-1/2 bg-black"
+                      color="gray"
+                      onClick={handleRegister}
+                    >
                       Register
                     </Button>
                   </div>

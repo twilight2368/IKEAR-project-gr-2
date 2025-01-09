@@ -20,10 +20,22 @@ import CartPage from "./pages/cart/CartPage";
 import PaymentPage from "./pages/payment/PaymentPage";
 import OrderPage from "./pages/order/OrderPage";
 import ProfilePage from "./pages/profile/ProfilePage";
-
+import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

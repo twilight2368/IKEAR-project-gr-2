@@ -30,6 +30,7 @@ const EmployeeSchema = new mongoose.Schema(
     },
     email: {
       type: String,
+      unique: true,
       validate: {
         validator: (value) => emailRegex.test(value),
         message: "Invalid email format",

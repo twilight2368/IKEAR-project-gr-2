@@ -2,6 +2,7 @@ const express = require("express");
 const { createProxyMiddleware } = require("http-proxy-middleware");
 const morgan = require("morgan");
 const cors = require("cors");
+const clc = require("cli-color");
 const app = express();
 
 app.use(
@@ -22,21 +23,21 @@ const services = {
   file_Management: "http://localhost:8005",
 };
 
-app.use(morgan("dev"));
-app.use(morgan("combined"));
+ app.use(morgan("dev"));
+
 
 // Proxy routes
 app.use(
-  "/service_2",
+  "/service2",
   createProxyMiddleware({
-    target: services.delivery_logistics_Management,
+    target: services.product_inventory_Management,
     changeOrigin: true,
     logger: console,
   })
 );
 
 app.use(
-  "/service_3",
+  "/service3",
   createProxyMiddleware({
     target: services.fav_cart_Management,
     changeOrigin: true,
@@ -45,7 +46,7 @@ app.use(
 );
 
 app.use(
-  "/service_4",
+  "/service4",
   createProxyMiddleware({
     target: services.order_payment_delivery_logistics_Management,
     changeOrigin: true,
@@ -54,16 +55,7 @@ app.use(
 );
 
 app.use(
-  "/service_5",
-  createProxyMiddleware({
-    target: services.delivery_logistics_Management,
-    changeOrigin: true,
-    logger: console,
-  })
-);
-
-app.use(
-  "/service_1",
+  "/service1",
   createProxyMiddleware({
     target: services.auth_store_Management,
     changeOrigin: true,
@@ -95,7 +87,7 @@ app.use(
 
 //! NOTE: NOT USING FOR NOW
 app.use(
-  "/service_6",
+  "/service6",
   createProxyMiddleware({
     target: services.file_Management,
     changeOrigin: true,
@@ -106,5 +98,5 @@ app.use(
 // Start the proxy server
 const PORT = 5000; // Port for the proxy server
 app.listen(PORT, () => {
-  console.log(`Proxy server is running on http://localhost:${PORT}`);
+  console.log(`Proxy server is running on: ` + clc.blue(`http://localhost:${PORT}`));
 });
