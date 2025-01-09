@@ -4,13 +4,12 @@ const morgan = require("morgan");
 const cors = require("cors");
 const app = express();
 
-// CORS configuration to allow multiple methods (GET, POST, PUT, DELETE)
 app.use(
   cors({
-    origin: "http://your-allowed-origin.com", // Your front-end origin
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allow these HTTP methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allow these headers
-    credentials: true, // Allow cookies to be sent and received
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 
@@ -19,9 +18,8 @@ const services = {
   auth_store_Management: "http://localhost:8001",
   product_inventory_Management: "http://localhost:8002",
   fav_cart_Management: "http://localhost:8003",
-  order_payment_Management: "http://localhost:8004",
-  delivery_logistics_Management: "http://localhost:8005",
-  file_Management: "http://localhost:8006",
+  order_payment_delivery_logistics_Management: "http://localhost:8004",
+  file_Management: "http://localhost:8005",
 };
 
 app.use(morgan("dev"));
@@ -49,7 +47,7 @@ app.use(
 app.use(
   "/service_4",
   createProxyMiddleware({
-    target: services.order_payment_Management,
+    target: services.order_payment_delivery_logistics_Management,
     changeOrigin: true,
     logger: console,
   })
