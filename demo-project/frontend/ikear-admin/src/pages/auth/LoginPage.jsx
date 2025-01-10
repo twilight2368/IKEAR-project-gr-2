@@ -1,21 +1,57 @@
 import React, { useState } from "react";
 import { Input, Button } from "@material-tailwind/react";
-
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setAdmin } from "../../app/AdminSlice";
+import { useNavigate } from "react-router-dom";
 export default function LoginPage() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login data submitted:", formData);
-   
+    try {
+      console.log("Form submitted: ", formData);
+      const response = await axios.post(
+        "http://localhost:5000/service1/auth/employee-login",
+        formData
+      );
+
+      if (response.status === 200) {
+        toast.success("successfully!");
+        console.log("====================================");
+        console.log(response.data.user);
+        console.log("====================================");
+        dispatch(setAdmin(response.data.user));
+
+        setFormData({
+          email: "",
+          password: "",
+        });
+
+        if (response.data.user.role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/store");
+        }
+      } else {
+        toast.error("Failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      toast.error("Error fetching data");
+    }
   };
 
   return (

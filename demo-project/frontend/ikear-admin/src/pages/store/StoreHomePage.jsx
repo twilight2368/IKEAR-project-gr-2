@@ -19,14 +19,9 @@ export default function StoreHomePage() {
         <div className=" row-span-2">
           <StoreInfoCard />
         </div>
-        <Link to="/store/order">
+        <Link to="/store/order" className=" col-span-2">
           <div className="p-6 text-4xl font-bold  h-48 text-white bg-black rounded  shadow-md shadow-gray-600 duration-300 hover:scale-95">
             Orders
-          </div>
-        </Link>
-        <Link to="/store/delivery">
-          <div className="p-6 text-4xl font-bold  h-48 text-white bg-black rounded  shadow-md shadow-gray-600 duration-300 hover:scale-95">
-            Delivery
           </div>
         </Link>
       </div>

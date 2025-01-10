@@ -3,10 +3,12 @@ const router = express.Router();
 
 const {
   getAllInventory,
-  getInventory,
+
   createInventory,
   updateInventory,
   deleteInventory,
+  getInventoryById,
+  getInventoryByStore,
 } = require("../controllers/inventory.controller");
 
 router.get("/", (req, res) => {
@@ -15,8 +17,9 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/inventory-store/:id", getInventoryByStore);
 router.get("/inventory", getAllInventory);
-router.get("/inventory/:id", getInventory);
+router.get("/inventory/:id", getInventoryById);
 router.post("/inventory", createInventory);
 router.put("/inventory/:id", updateInventory);
 router.delete("/inventory/:id", deleteInventory);

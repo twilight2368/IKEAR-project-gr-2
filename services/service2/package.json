@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx nodemon",
-    "seeding": "node src/models/seeding.js"
+    "seeding": "node src/models/seeding.js",
+    "seeding-item": "node src/models/seeding-item.js",
+    "seeding-inventory": "node src/models/seeding-inventory.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +22,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mongoose": "^8.9.2",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "nanoid": "^3.3.8"
   }
 }

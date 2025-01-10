@@ -8,10 +8,14 @@ import AdminEmployeePage from "../pages/admin/AdminEmployeePage";
 import AdminUserPage from "../pages/admin/AdminUserPage";
 import AdminItemPage from "../pages/admin/AdminItemPage";
 import AdminProductRoomPage from "../pages/admin/AdminProductRoomPage";
-
+import { useSelector } from "react-redux";
+import UnauthorizedPage from "../pages/UnauthorizedPage";
 export default function AdminRoutes() {
-  return false ? (
-    <></>
+  const admin = useSelector((state) => state.admin);
+  return !admin.admin || !admin.login || admin.admin?.role !== "admin" ? (
+    <>
+      <UnauthorizedPage />
+    </>
   ) : (
     <Routes>
       <Route path="/*" element={<AdminLayout />}>

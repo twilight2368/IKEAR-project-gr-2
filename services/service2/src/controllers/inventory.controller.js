@@ -1,7 +1,52 @@
 const InventoryModel = require("../models/schemas/Inventory");
+const { publishToQueue } = require("../utils/mq");
 
-const getInventory = async (req, res, next) => {
+const getInventoryById = async (req, res, next) => {
   try {
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getInventoryByStore = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { page = 1, limit = 24 } = req.query; // Get page and limit from query params (default: 1, 10)
+
+    // Calculate the skip value for pagination
+    const skip = (page - 1) * limit;
+
+    // Fetch paginated data with .skip() and .limit()
+    const inventoryList = await InventoryModel.find({ store: id })
+      .skip(skip)
+      .limit(limit)
+      .populate({
+        path: "item", // First level population: Item
+        populate: ["room", "holiday", "product"],
+      });
+
+    // Count total inventory items for pagination
+    const totalItems = await InventoryModel.countDocuments({ store: id });
+
+    if (!inventoryList || inventoryList.length === 0) {
+      return res.status(404).json({
+        message: "Inventory not found",
+        data: [],
+      });
+    }
+
+    const totalPages = Math.ceil(totalItems / limit); // Calculate total pages
+
+    res.json({
+      message: "Inventory found",
+      data: inventoryList,
+      pagination: {
+        currentPage: page,
+        totalItems: totalItems,
+        totalPages: totalPages,
+        itemsPerPage: limit,
+      },
+    });
   } catch (error) {
     next(error);
   }
@@ -64,6 +109,14 @@ const createInventory = async (req, res, next) => {
     });
 
     await inventory.save();
+
+    publishToQueue(
+      "product",
+      JSON.stringify({
+        event: EVENT_TYPE.CREATE,
+        data: inventory,
+      })
+    );
   } catch (error) {
     next(error);
   }
@@ -85,7 +138,8 @@ const deleteInventory = async (req, res, next) => {
 
 module.exports = {
   getAllInventory,
-  getInventory,
+  getInventoryById,
+  getInventoryByStore,
   createInventory,
   updateInventory,
   deleteInventory,

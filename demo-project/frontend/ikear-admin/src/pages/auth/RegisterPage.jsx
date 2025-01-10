@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Input, Button, Select, Option } from "@material-tailwind/react";
-
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
     name: "",
@@ -12,14 +14,23 @@ export default function RegisterPage() {
   });
 
   const [stores, setStores] = useState([]);
-
+  const [roles, setRoles] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
-    // Simulate fetching stores from API
-    setStores([
-      { id: "1", name: "Store 1" },
-      { id: "2", name: "Store 2" },
-      { id: "3", name: "Store 3" },
-    ]);
+    axios.get("http://localhost:5000/service1/other/roles").then((response) => {
+      setRoles(response.data.data);
+      console.log("====================================");
+      console.log(response.data.data);
+      console.log("====================================");
+    });
+    axios
+      .get("http://localhost:5000/service1/store/stores")
+      .then((response) => {
+        setStores(response.data.data);
+        console.log("====================================");
+        console.log(response.data.data);
+        console.log("====================================");
+      });
   }, []);
 
   const handleChange = (e) => {
@@ -27,9 +38,33 @@ export default function RegisterPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted: ", formData);
+    try {
+      console.log("Form submitted: ", formData);
+      const response = await axios.post(
+        "http://localhost:5000/service1/auth/employee-register",
+        formData
+      );
+
+      if (response.status === 201) {
+        toast.success("successfully!");
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          password: "",
+          role: "",
+          store: "",
+        });
+        navigate("/login");
+      } else {
+        toast.error("Failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      toast.error("Error fetching data");
+    }
   };
 
   return (
@@ -68,34 +103,44 @@ export default function RegisterPage() {
             onChange={handleChange}
             required
           />
-          {/* <Select
-            label="Role"
-            value={formData.role}
-            onChange={(value) =>
-              setFormData((prev) => ({ ...prev, role: value }))
-            }
-            required
-          >
-            {Object.entries(ROLE_LIST.ROLES).map(([key, value]) => (
-              <Option key={key} value={value}>
-                {value}
-              </Option>
-            ))}
-          </Select>
-          <Select
-            label="Store"
-            defaultValue={formData.store}
-            onChange={(value) =>
-              setFormData((prev) => ({ ...prev, store: value }))
-            }
-            required
-          >
-            {stores.map((store) => (
-              <Option key={store.id} value={store.id}>
-                {store.name}
-              </Option>
-            ))}
-          </Select> */}
+          {roles.length && roles ? (
+            <>
+              <Select
+                label="Role"
+                value={formData.role}
+                onChange={(value) =>
+                  setFormData((prev) => ({ ...prev, role: value }))
+                }
+                required
+              >
+                {roles.map((value, i) => (
+                  <Option key={i} value={value}>
+                    {value}
+                  </Option>
+                ))}
+              </Select>
+            </>
+          ) : (
+            <></>
+          )}
+          {stores.length && stores ? (
+            <Select
+              label="Store"
+              defaultValue={formData.store}
+              onChange={(value) =>
+                setFormData((prev) => ({ ...prev, store: value }))
+              }
+              required
+            >
+              {stores.map((store) => (
+                <Option key={store._id} value={store._id}>
+                  {store.name}
+                </Option>
+              ))}
+            </Select>
+          ) : (
+            <></>
+          )}
           <Button type="submit" fullWidth>
             Register
           </Button>
