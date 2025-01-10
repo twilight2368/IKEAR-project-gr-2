@@ -35,14 +35,6 @@ export default function StoreLayout() {
           >
             Orders
           </NavLink>
-          <NavLink
-            to="/store/delivery"
-            className={({ isActive }) => {
-              return isActive ? "border-b-2 border-white" : "";
-            }}
-          >
-            Delivery
-          </NavLink>
         </div>
         <div className="w-3/12">
           <Profile />

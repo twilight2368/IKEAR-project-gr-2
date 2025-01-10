@@ -4,7 +4,6 @@ import StoreLayout from "../layouts/StoreLayout";
 import StoreHomePage from "../pages/store/StoreHomePage";
 import InventoryStorePage from "../pages/store/InventoryStorePage";
 import OrderStorePage from "../pages/store/OrderStorePage";
-import DeliveryStorePage from "../pages/store/DeliveryStorePage";
 import OrderDetailPage from "../pages/store/OrderDetailPage";
 
 export default function StoreRoutes() {
@@ -17,7 +16,6 @@ export default function StoreRoutes() {
         <Route path="inventory" element={<InventoryStorePage />} />
         <Route path="order" element={<OrderStorePage />} />
         <Route path="order/:id" element={<OrderDetailPage />} />
-        <Route path="delivery" element={<DeliveryStorePage />} />
       </Route>
     </Routes>
   );

@@ -1,6 +1,4 @@
 import { Card, CardBody, Chip } from "@material-tailwind/react";
-import React from "react";
-import UserCard from "../admin/UserCard";
 import { Link } from "react-router-dom";
 
 export default function OrderCard() {

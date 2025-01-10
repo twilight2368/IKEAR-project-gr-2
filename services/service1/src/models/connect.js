@@ -12,10 +12,7 @@ const CONNECT_STRING = DB_CONFIG.stringConnect;
 
 const connectMongoDB = async () => {
   try {
-    await mongoose.connect(CONNECT_STRING, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(CONNECT_STRING);
 
     console.log("====================================");
     console.log(clc.green("Connected to MongoDB successfully"));

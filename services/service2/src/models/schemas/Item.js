@@ -38,12 +38,12 @@ const ItemSchema = new mongoose.Schema(
     color: {
       type: String,
       required: false,
-      enum: Object.values(SIZES),
+      enum: Object.values(COLORS),
     },
     size: {
       type: String,
       required: false,
-      enum: Object.values(COLORS),
+      enum: Object.values(SIZES),
     },
     image: {
       type: [String],

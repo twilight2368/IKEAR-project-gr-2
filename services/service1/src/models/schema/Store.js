@@ -19,12 +19,6 @@ const StoreSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    longitude: {
-      type: Number,
-    },
-    latitude: {
-      type: Number,
-    },
     city: {
       type: String,
       required: true,

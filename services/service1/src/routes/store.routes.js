@@ -4,6 +4,7 @@ const {
   getStore,
   updateStore,
   deleteStore,
+  createStore,
 } = require("../controllers/store.controller");
 const router = express.Router();
 
@@ -13,10 +14,11 @@ router.get("/", (req, res) => {
   });
 });
 
-
 router.get("/stores", getStores);
 
 router.get("/store/:id", getStore);
+
+router.post("/store", createStore);
 
 router.put("/update-store/:id", updateStore);
 

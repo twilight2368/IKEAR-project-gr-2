@@ -10,3 +10,4 @@ const {
 router.get("/fav-item/:id", getFavItem);
 router.post("/fav-item", addFavItem);
 router.delete("/fav-item/:id", removeFavItem);
+module.exports = router;

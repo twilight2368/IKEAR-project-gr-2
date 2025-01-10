@@ -1,5 +1,7 @@
 const express = require("express");
 const { Room, Product, Holiday } = require("../models/schemas/Item");
+const COLORS = require("../constants/item/color");
+const SIZES = require("../constants/item/size");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -62,6 +64,28 @@ router.get("/holidays", async (req, res, next) => {
     res.json({
       message: "Holiday found",
       data: holidays,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/colors", async (req, res, next) => {
+  try {
+    res.json({
+      message: "Colors found",
+      data: Object.values(COLORS),
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/sizes", async (req, res, next) => {
+  try {
+    res.json({
+      message: "Sizes found",
+      data: Object.values(SIZES),
     });
   } catch (error) {
     next(error);

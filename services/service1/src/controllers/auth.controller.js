@@ -1,11 +1,12 @@
 const bcrypt = require("bcrypt");
 
 const AUTH_CONFIG = require("../configs/auth.config");
-
+const EVENT_TYPE = require("../constants/mq/type");
 //TODO: AUTHENTICATION CONTROLLERS
 
 const UserModel = require("../models/schema/User");
 const EmployeeModel = require("../models/schema/Employee");
+const { publishToExchange } = require("../utils/mq");
 
 /**
  * todo: Register a new user
@@ -43,6 +44,22 @@ const userRegister = async (req, res, next) => {
     });
 
     await newUser.save();
+
+    //todo: Publish to RabbitMQ "user" queue
+    const message = JSON.stringify({
+      event: EVENT_TYPE.CREATE,
+      data: {
+        _id: newUser._id,
+        username: newUser.username,
+        email: newUser.email,
+        phone: newUser.phone,
+        country: newUser.country,
+        city: newUser.city,
+        address: newUser.address,
+      },
+    });
+
+    await publishToExchange("user", message);
 
     res.status(201).json({
       message: "User register successful",
