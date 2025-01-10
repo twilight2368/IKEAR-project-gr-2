@@ -4,7 +4,7 @@ const EVENT_TYPE = require("../constants/mq/type");
 //TODO: STORE CONTROLLERS
 const getStores = async (req, res, next) => {
   try {
-    const stores = StoreModel.find();
+    const stores = await StoreModel.find();
 
     if (!stores || stores.length == 0) {
       return res.json({

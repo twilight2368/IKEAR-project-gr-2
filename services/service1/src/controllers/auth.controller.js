@@ -142,7 +142,7 @@ const employeeRegister = async (req, res, next) => {
 
     await newEmployee.save();
 
-    res.json({
+    res.status(201).json({
       message: "Employee created successful",
       data: newEmployee,
     });
@@ -153,12 +153,10 @@ const employeeRegister = async (req, res, next) => {
 
 const employeeLogin = async (req, res, next) => {
   try {
-    const { store, email, password, role } = req.body;
+    const { email, password } = req.body;
 
-    const employee = EmployeeModel.findOne({
-      store: store,
+    const employee = await EmployeeModel.findOne({
       email: email,
-      role: role,
     }).select("+password");
 
     if (!employee) {
@@ -175,9 +173,12 @@ const employeeLogin = async (req, res, next) => {
       });
     }
 
+    const employeeWithoutPassword = employee.toObject();
+    delete employeeWithoutPassword.password;
+
     res.json({
       message: "Login successful",
-      user: user,
+      user: employeeWithoutPassword,
     });
   } catch (error) {
     next(error);

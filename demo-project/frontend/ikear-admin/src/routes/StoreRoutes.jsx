@@ -5,10 +5,15 @@ import StoreHomePage from "../pages/store/StoreHomePage";
 import InventoryStorePage from "../pages/store/InventoryStorePage";
 import OrderStorePage from "../pages/store/OrderStorePage";
 import OrderDetailPage from "../pages/store/OrderDetailPage";
+import UnauthorizedPage from "../pages/UnauthorizedPage";
+import { useSelector } from "react-redux";
 
 export default function StoreRoutes() {
-  return false ? (
-    <></>
+  const admin = useSelector((state) => state.admin);
+  return !admin.admin || !admin.login ? (
+    <>
+      <UnauthorizedPage />
+    </>
   ) : (
     <Routes>
       <Route path="/*" element={<StoreLayout />}>

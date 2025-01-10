@@ -25,18 +25,40 @@ const getItem = async (req, res, next) => {
 
 const getAllItem = async (req, res, next) => {
   try {
-    const items = await ItemModel.find();
+    const { page = 1, limit = 24 } = req.query; // Get page and limit from query parameters
+    const skip = (page - 1) * limit; // Calculate the number of items to skip
+
+    const items = await ItemModel.find()
+      .skip(skip) // Skip the items based on the current page
+      .limit(limit)
+      .populate(["room", "product", "holiday"]); // Limit the number of items returned per page
+
+    const totalItems = await ItemModel.countDocuments(); // Get the total number of items in the database
 
     if (!items || items.length == 0) {
       return res.status(404).json({
-        message: "Item not found",
+        message: "Items not found",
         data: [],
+        pagination: {
+          currentPage: page,
+          totalItems: 0,
+          totalPages: 0,
+          itemsPerPage: limit,
+        },
       });
     }
 
+    const totalPages = Math.ceil(totalItems / limit); // Calculate the total number of pages
+
     res.json({
-      message: "Item found",
+      message: "Items found",
       data: items,
+      pagination: {
+        currentPage: page,
+        totalItems: totalItems,
+        totalPages: totalPages,
+        itemsPerPage: limit,
+      },
     });
   } catch (error) {
     next(error);
