@@ -25,12 +25,12 @@ export default function StoreHeader() {
         end={false}
         icon={<GoHomeFill />}
       />
-      <StoreHeaderItem
+      {/* <StoreHeaderItem
         label="Holiday shop"
         to="/store/holiday"
         end={false}
         icon={<TbChristmasBall />}
-      />
+      /> */}
     </div>
   );
 }

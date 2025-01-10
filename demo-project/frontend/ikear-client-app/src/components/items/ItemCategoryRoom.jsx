@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import RoomLogo from "../../assets/icons/room-svgrepo-com.svg";
-export default function ItemCategoryRoom({ label }) {
+export default function ItemCategoryRoom({ label, room_id }) {
   const navigate = useNavigate();
   return (
     <div
       className="w-full h-full relative  cursor-pointer"
       onClick={() => {
-        navigate("/store/room/room-id");
+        navigate(`/store/room/${room_id}`);
       }}
     >
       <div className=" h-full w-full flex justify-center items-center">

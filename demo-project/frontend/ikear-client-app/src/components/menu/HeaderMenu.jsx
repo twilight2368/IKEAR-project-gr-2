@@ -11,11 +11,16 @@ import { FaRegHeart, FaUser, FaHistory } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { FaAddressCard } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import { removeUser } from "../../app/slicer/UserSlicer";
 export default function HeaderMenu() {
   const navigate = useNavigate();
+  const login = useSelector((state) => state.user.login);
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
   return (
     <div className="w-full flex flex-row justify-end gap-2 items-center p-2">
-      {false ? (
+      {login && user ? (
         <>
           <div>
             <IconButton
@@ -85,6 +90,10 @@ export default function HeaderMenu() {
                       variant="outlined"
                       size="sm"
                       className="w-full"
+                      onClick={() => {
+                        dispatch(removeUser());
+                        navigate("/");
+                      }}
                     >
                       Logout
                     </Button>

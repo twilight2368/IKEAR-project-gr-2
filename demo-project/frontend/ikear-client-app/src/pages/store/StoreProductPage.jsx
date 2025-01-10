@@ -1,11 +1,79 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import ItemCard from "../../components/items/ItemCard";
 import { Carousel, IconButton } from "@material-tailwind/react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import ItemCategoryProduct from "../../components/items/ItemCategoryProduct";
 import ImageHeader from "../../assets/images/animals-bears-polar-bears-cubs-wallpaper-d37786cedb3ce3002e9e583c1c6409de.jpg";
-
+import axios from "axios";
 export default function StoreProductPage() {
+  const [dataSample1, setDataSample1] = useState();
+  const [dataSample2, setDataSample2] = useState();
+  const [dataSample3, setDataSample3] = useState();
+  const [dataSample4, setDataSample4] = useState();
+  const [productList, setProductList] = useState();
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/service2/other/products")
+      .then((response) => {
+        setProductList(response.data.data);
+        console.log("====================================");
+        console.log(response.data.data);
+        console.log("====================================");
+      });
+  }, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/service2/item/items-random", {
+        params: {
+          num: 15,
+        },
+      })
+      .then((response) => {
+        setDataSample1(response.data.data);
+        console.log("====================================");
+        console.log(response.data.data);
+        console.log("====================================");
+      });
+
+    axios
+      .get("http://localhost:5000/service2/item/items-random", {
+        params: {
+          num: 5,
+        },
+      })
+      .then((response) => {
+        setDataSample2(response.data.data);
+        console.log("====================================");
+        console.log(response.data.data);
+        console.log("====================================");
+      });
+
+    axios
+      .get("http://localhost:5000/service2/item/items-random", {
+        params: {
+          num: 5,
+        },
+      })
+      .then((response) => {
+        setDataSample3(response.data.data);
+        console.log("====================================");
+        console.log(response.data.data);
+        console.log("====================================");
+      });
+
+    axios
+      .get("http://localhost:5000/service2/item/items-random", {
+        params: {
+          num: 5,
+        },
+      })
+      .then((response) => {
+        setDataSample4(response.data.data);
+        console.log("====================================");
+        console.log(response.data.data);
+        console.log("====================================");
+      });
+  }, []);
   return (
     <div className="w-full min-h-screen">
       <div className=" mb-10 flex flex-row gap-0 justify-center items-center text-white bg-black">
@@ -33,21 +101,15 @@ export default function StoreProductPage() {
       <div className="p-10 mb-20">
         <h2 className=" text-4xl font-black mb-6">IKEAR Collections</h2>
         <div className="w-full grid grid-cols-5 gap-6">
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
+          {dataSample1 ? (
+            <>
+              {dataSample1.map((data, i) => (
+                <ItemCard key={i} item={data} />
+              ))}
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       <div className="p-10 mb-20">
@@ -90,25 +152,37 @@ export default function StoreProductPage() {
             )}
           >
             <div className="w-full grid grid-cols-5 gap-6 p-3">
-              <ItemCard />
-              <ItemCard />
-              <ItemCard />
-              <ItemCard />
-              <ItemCard />
+              {dataSample2 ? (
+                <>
+                  {dataSample2.map((data, i) => (
+                    <ItemCard key={i} item={data} />
+                  ))}
+                </>
+              ) : (
+                <></>
+              )}
             </div>
             <div className="w-full grid grid-cols-5 gap-6 p-3">
-              <ItemCard />
-              <ItemCard />
-              <ItemCard />
-              <ItemCard />
-              <ItemCard />
+              {dataSample3 ? (
+                <>
+                  {dataSample3.map((data, i) => (
+                    <ItemCard key={i} item={data} />
+                  ))}
+                </>
+              ) : (
+                <></>
+              )}
             </div>
             <div className="w-full grid grid-cols-5 gap-6 p-3">
-              <ItemCard />
-              <ItemCard />
-              <ItemCard />
-              <ItemCard />
-              <ItemCard />
+              {dataSample4 ? (
+                <>
+                  {dataSample4.map((data, i) => (
+                    <ItemCard key={i} item={data} />
+                  ))}
+                </>
+              ) : (
+                <></>
+              )}
             </div>
           </Carousel>
         </div>
@@ -121,31 +195,21 @@ export default function StoreProductPage() {
           Shop products
         </div>
         <div className="w-full grid grid-cols-5 gap-6 p-3 mb-10">
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-        </div>
-        <div className="w-full flex flex-row justify-center items-center gap-6">
-          <IconButton color="gray" className="bg-black">
-            <FaArrowLeft />
-          </IconButton>
-          <IconButton color="gray" className="bg-black">
-            <FaArrowRight />
-          </IconButton>
+          {productList ? (
+            <>
+              {productList.map((e, i) => {
+                return (
+                  <ItemCategoryProduct
+                    key={i}
+                    label={e.name}
+                    product_id={e._id}
+                  />
+                );
+              })}
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>

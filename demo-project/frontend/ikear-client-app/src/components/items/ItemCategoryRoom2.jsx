@@ -3,13 +3,13 @@ import RoomLogo from "../../assets/icons/room-svgrepo-com.svg";
 import { Card, CardBody } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 
-export default function ItemCategoryRoom2({ label }) {
+export default function ItemCategoryRoom2({ label, room_id }) {
   const navigate = useNavigate();
   return (
     <Card
       className="w-full rounded-sm cursor-pointer"
       onClick={() => {
-        navigate("/store/room/room-id");
+        navigate("/store/room/" + room_id);
       }}
     >
       <CardBody>

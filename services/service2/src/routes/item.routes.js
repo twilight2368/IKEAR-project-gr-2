@@ -11,6 +11,7 @@ const {
   createItem,
   updateItem,
   deleteItem,
+  getRandomItem,
 } = require("../controllers/item.controller");
 
 router.get("/", (req, res) => {
@@ -19,6 +20,7 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/items-random", getRandomItem);
 router.get("/items", getAllItem);
 router.get("/items/:id", getItem);
 router.get("/items-filter", getItemWithFilter);
