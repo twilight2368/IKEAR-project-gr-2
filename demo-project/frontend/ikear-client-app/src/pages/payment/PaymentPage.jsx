@@ -67,7 +67,7 @@ export default function PaymentPage() {
               </div>
               <div className="mt-4">
                 <Select label="Purchase Method">
-                  <Option value="offline">Buy Offline</Option>
+                  <Option value="offline">Buy Online</Option>
                   <Option value="store">Buy at Store</Option>
                 </Select>
               </div>

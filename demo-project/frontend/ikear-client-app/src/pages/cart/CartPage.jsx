@@ -3,9 +3,12 @@ import ItemInCart from "../../components/items/ItemInCart";
 import { Footer } from "../../components/footer/Footer";
 import { Button, Option, Select } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function CartPage() {
   const navigate = useNavigate();
+  const cartItems = useSelector((state) => state.cart.items);
+  const cart = useSelector((state) => state.cart);
   return (
     <div className="w-full">
       <div className=" p-6 pt-12 ">
@@ -21,11 +24,11 @@ export default function CartPage() {
           <div className=" w-4/6 px-24 flex flex-col gap-3 justify-center">
             <li>
               <span>Total products: </span>
-              <span>0</span>
+              <span>{cart?.totalProducts}</span>
             </li>
             <li>
               <span>Total items: </span>
-              <span>0</span>
+              <span>{cart?.totalItems}</span>
             </li>
 
             <div className=" flex flex-row justify-start items-center">
@@ -44,7 +47,7 @@ export default function CartPage() {
             <div className=" w-full h-full flex flex-col justify-center items-start">
               <span className=" text-sm italic text-gray-600">Total price</span>
               <p className=" truncate text-black font-black text-2xl before:content-['$']">
-                10000000
+                {cart?.totalAmount}
               </p>
             </div>
           </div>
@@ -63,13 +66,12 @@ export default function CartPage() {
         </div>
       </div>
       <div className="w-full min-h-screen p-12 flex justify-center">
-        <div className="w-4/5 grid grid-cols-1 gap-12">
-          <ItemInCart />
-          <ItemInCart />
-          <ItemInCart />
-          <ItemInCart />
-          <ItemInCart />
-          <ItemInCart />
+        <div className="w-4/5 grid grid-cols-1 ">
+          {cartItems.length === 0 ? (
+            <div className="text-center text-gray-500">Your cart is empty</div>
+          ) : (
+            cartItems.map((item) => <ItemInCart key={item.id} item={item} />)
+          )}
         </div>
       </div>
       <div className=" w-full">

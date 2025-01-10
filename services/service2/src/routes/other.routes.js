@@ -70,6 +70,68 @@ router.get("/holidays", async (req, res, next) => {
   }
 });
 
+router.get("/rooms/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const room = await Room.findById(id);
+
+    if (!room) {
+      return res.status(404).json({
+        message: "Room not found",
+        data: null,
+      });
+    }
+
+    res.json({
+      message: "Room found",
+      data: room,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/products/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.findById(id);
+
+    if (!product) {
+      return res.status(404).json({
+        message: "Product not found",
+        data: null,
+      });
+    }
+
+    res.json({
+      message: "Product found",
+      data: product,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/holidays/:id", async (req, res, next) => {
+  try {
+    const holiday = await Holiday.findById(id);
+
+    if (!holiday) {
+      return res.status(404).json({
+        message: "Holiday not found",
+        data: null,
+      });
+    }
+
+    res.json({
+      message: "Holiday found",
+      data: holiday,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get("/colors", async (req, res, next) => {
   try {
     res.json({

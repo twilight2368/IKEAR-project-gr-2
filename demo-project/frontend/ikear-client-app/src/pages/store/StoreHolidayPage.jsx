@@ -40,9 +40,9 @@ export default function StoreHolidayPage() {
               </Select>
             </div>
           </div>
-          <div className="w-3/4">
+          {/* <div className="w-3/4">
             <MenuFilter />
-          </div>
+          </div> */}
         </div>
         <div className="w-full min-h-screen px-12">
           <div className="grid grid-cols-5 gap-6">

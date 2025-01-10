@@ -1,7 +1,17 @@
-import React from "react";
+import { useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
 import ItemCategoryRoom from "../components/items/ItemCategoryRoom";
+import axios from "axios";
 export default function StoreRoomLayout() {
+  const [roomList, setRoomList] = useState();
+  useEffect(() => {
+    axios.get("http://localhost:5000/service2/other/rooms").then((response) => {
+      setRoomList(response.data.data);
+      console.log("====================================");
+      console.log(response.data.data);
+      console.log("====================================");
+    });
+  }, []);
   return (
     <div className="relative">
       <div className="w-full flex flex-row h-40">
@@ -9,46 +19,19 @@ export default function StoreRoomLayout() {
           <div className="text-white font-black text-2xl">IKEAR rooms</div>
         </div>
         <div className="w-full overflow-x-auto flex flex-row px-3 gap-3 custom-scroll-bar">
-          <div className=" flex-shrink-0 w-1/5 ">
-            <ItemCategoryRoom label={"Bedroom"} />
-          </div>
-          <div className=" flex-shrink-0 w-1/5">
-            <ItemCategoryRoom label={"Living room"} />
-          </div>
-          <div className=" flex-shrink-0 w-1/5">
-            <ItemCategoryRoom label={"Kitchen"} />
-          </div>
-          <div className=" flex-shrink-0 w-1/5">
-            <ItemCategoryRoom label={"Dining room"} />
-          </div>
-          <div className=" flex-shrink-0 w-1/5">
-            <ItemCategoryRoom label={"Bathroom"} />
-          </div>
-          <div className=" flex-shrink-0 w-1/5">
-            <ItemCategoryRoom label={"Children room"} />
-          </div>
-          <div className=" flex-shrink-0 w-1/5">
-            <ItemCategoryRoom label={"Study room"} />
-          </div>
-
-          <div className=" flex-shrink-0 w-1/5">
-            <ItemCategoryRoom label={"Office"} />
-          </div>
-          <div className=" flex-shrink-0 w-1/5">
-            <ItemCategoryRoom label={"Gaming room"} />
-          </div>
-          <div className=" flex-shrink-0 w-1/5">
-            <ItemCategoryRoom label={"Garden"} />
-          </div>
-          <div className=" flex-shrink-0 w-1/5">
-            <ItemCategoryRoom label={"Hallway"} />
-          </div>
-          <div className=" flex-shrink-0 w-1/5">
-            <ItemCategoryRoom label={"Laundry room"} />
-          </div>
-          <div className=" flex-shrink-0 w-1/5">
-            <ItemCategoryRoom label={"Garage"} />
-          </div>
+          {roomList ? (
+            <>
+              {roomList.map((room, i) => {
+                return (
+                  <div key={i} className=" flex-shrink-0 w-1/5 ">
+                    <ItemCategoryRoom label={room.name} room_id={room._id} />
+                  </div>
+                );
+              })}
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       <div className="w-full">

@@ -1,8 +1,17 @@
 import BearHeadingImage from "../../assets/images/animals-nature-bears-ice-wallpaper-cb360c3d33c1cf69e5f44b89dddcbc50.jpg";
-
+import { useEffect, useState } from "react";
 import ItemCategoryRoom2 from "../../components/items/ItemCategoryRoom2";
-
+import axios from "axios";
 export default function StoreAllRoomPage() {
+  const [roomList, setRoomList] = useState();
+  useEffect(() => {
+    axios.get("http://localhost:5000/service2/other/rooms").then((response) => {
+      setRoomList(response.data.data);
+      console.log("====================================");
+      console.log(response.data.data);
+      console.log("====================================");
+    });
+  }, []);
   return (
     <div className="w-full ">
       <div className="w-full flex justify-center items-center mb-20 bg-black text-white">
@@ -25,31 +34,21 @@ export default function StoreAllRoomPage() {
           <h2 className=" text-3xl font-bold">All rooms</h2>
         </div>
         <div className="w-full grid grid-cols-3 gap-6 p-6">
-          <ItemCategoryRoom2 label={"Living room"} />
-
-          <ItemCategoryRoom2 label={"Bedroom"} />
-
-          <ItemCategoryRoom2 label={"Bathroom"} />
-
-          <ItemCategoryRoom2 label={"Kitchen"} />
-
-          <ItemCategoryRoom2 label={"Dining room"} />
-
-          <ItemCategoryRoom2 label={"Children room"} />
-
-          <ItemCategoryRoom2 label={"Study room"} />
-
-          <ItemCategoryRoom2 label={"Office"} />
-
-          <ItemCategoryRoom2 label={"Gaming room"} />
-
-          <ItemCategoryRoom2 label={"Hallway"} />
-
-          <ItemCategoryRoom2 label={"Laundry room"} />
-
-          <ItemCategoryRoom2 label={"Garden"} />
-
-          <ItemCategoryRoom2 label={"Garage"} />
+          {roomList ? (
+            <>
+              {roomList.map((room, i) => {
+                return (
+                  <ItemCategoryRoom2
+                    key={i}
+                    label={room.name}
+                    room_id={room._id}
+                  />
+                );
+              })}
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>

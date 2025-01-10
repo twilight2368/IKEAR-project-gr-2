@@ -5,14 +5,64 @@ import { Button, IconButton } from "@material-tailwind/react";
 import ItemCard from "../../components/items/ItemCard";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import ItemCategoryRoom from "../../components/items/ItemCategoryRoom";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import ItemCategoryProduct from "../../components/items/ItemCategoryProduct";
 import { Footer } from "../../components/footer/Footer";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 export default function LandingPage() {
   const category_ref = useRef();
   const navigate = useNavigate();
+  const [dataSample1, setDataSample1] = useState();
+  const [dataSample2, setDataSample2] = useState();
+  const [roomList, setRoomList] = useState();
+  const [productList, setProductList] = useState();
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/service2/item/items-random", {
+        params: {
+          num: 10,
+        },
+      })
+      .then((response) => {
+        setDataSample1(response.data.data);
+        console.log("====================================");
+        console.log(response.data.data);
+        console.log("====================================");
+      });
+  }, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/service2/item/items-random", {
+        params: {
+          num: 10,
+        },
+      })
+      .then((response) => {
+        setDataSample2(response.data.data);
+        console.log("====================================");
+        console.log(response.data.data);
+        console.log("====================================");
+      });
+  }, []);
+  useEffect(() => {
+    axios.get("http://localhost:5000/service2/other/rooms").then((response) => {
+      setRoomList(response.data.data);
+      console.log("====================================");
+      console.log(response.data.data);
+      console.log("====================================");
+    });
+  }, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/service2/other/products")
+      .then((response) => {
+        setProductList(response.data.data);
+        console.log("====================================");
+        console.log(response.data.data);
+        console.log("====================================");
+      });
+  }, []);
   return (
     <div className=" min-h-screen">
       <div className="w-full relative landing-page-hero min-h-screen mb-20">
@@ -40,16 +90,15 @@ export default function LandingPage() {
           New stuffs
         </div>
         <div className="p-20 grid grid-cols-5 gap-5">
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
+          {dataSample1 ? (
+            <>
+              {dataSample1.map((data, i) => (
+                <ItemCard key={i} item={data} />
+              ))}
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       <div>
@@ -57,16 +106,15 @@ export default function LandingPage() {
           Popular stuffs
         </div>
         <div className="p-20 grid grid-cols-5 gap-5">
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
+          {dataSample2 ? (
+            <>
+              {dataSample2.map((data, i) => (
+                <ItemCard key={i} item={data} />
+              ))}
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       <div className="min-h-96 px-28">
@@ -116,45 +164,22 @@ export default function LandingPage() {
               }}
               ref={category_ref}
             >
-              <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom label={"Living room"} />
-              </div>
-              <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom label={"Bedroom"} />
-              </div>
-              <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom label={"Bathroom"} />
-              </div>
-              <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom label={"Kitchen"} />
-              </div>
-              <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom label={"Dining room"} />
-              </div>
-              <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom label={"Children room"} />
-              </div>
-              <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom label={"Study room"} />
-              </div>
-              <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom label={"Office"} />
-              </div>
-              <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom label={"Gaming room"} />
-              </div>
-              <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom label={"Hallway"} />
-              </div>
-              <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom label={"Laundry room"} />
-              </div>
-              <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom label={"Garden"} />
-              </div>
-              <div className=" h-full w-1/3 flex-shrink-0 p-2">
-                <ItemCategoryRoom label={"Garage"} />
-              </div>
+              {roomList ? (
+                <>
+                  {roomList.map((room, i) => {
+                    return (
+                      <div key={i} className=" h-full w-1/3 flex-shrink-0 p-2">
+                        <ItemCategoryRoom
+                          label={room.name}
+                          room_id={room._id}
+                        />
+                      </div>
+                    );
+                  })}
+                </>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </div>
@@ -165,23 +190,22 @@ export default function LandingPage() {
           Shop products
         </div>
         <div className="w-full grid grid-cols-5 gap-6 p-3 mb-10">
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
-          <ItemCategoryProduct />
+          {productList ? (
+            <>
+              {productList.map((e, i) => {
+                return (
+                  <ItemCategoryProduct
+                    key={i}
+                    label={e.name}
+                    product_id={e._id}
+                  />
+                );
+              })}
+            </>
+          ) : (
+            <></>
+          )}
         </div>
-        <div className="w-full text-center underline">See all products</div>
       </div>
       <div className="w-full">
         <Footer />

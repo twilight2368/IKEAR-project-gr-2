@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-export default function RoomStoreItem({ label, background_image }) {
+export default function RoomStoreItem({ label, background_image, room_id }) {
   const navigate = useNavigate();
   return (
     <div
       className="relative h-48 p-0 cursor-pointer"
       onClick={() => {
-        navigate("/store/room/room-id");
+        navigate("/store/room/" + room_id);
       }}
     >
       <div className="relative w-full h-full">

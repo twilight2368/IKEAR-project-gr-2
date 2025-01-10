@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import {
   Menu,
   MenuHandler,
@@ -11,8 +12,18 @@ import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import "../style.css";
 import { Link } from "react-router-dom";
 export default function StoreProductMenu() {
-  const [openMenu, setOpenMenu] = React.useState(false);
-
+  const [openMenu, setOpenMenu] = useState(false);
+  const [productList, setProductList] = useState();
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/service2/other/products")
+      .then((response) => {
+        setProductList(response.data.data);
+        console.log("====================================");
+        console.log(response.data.data);
+        console.log("====================================");
+      });
+  }, []);
   return (
     <Menu open={openMenu} handler={setOpenMenu}>
       <MenuHandler>
@@ -37,47 +48,19 @@ export default function StoreProductMenu() {
         ></Card>
         <div className="custom-scroll-bar col-span-5 w-full h-full overflow-y-auto p-2">
           <div className=" grid grid-cols-4 gap-3">
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
-            <StoreProductItem label={"Item"} />
+            {productList ? (
+              <>
+                {productList.map((product, i) => (
+                  <StoreProductItem
+                    key={i}
+                    label={product.name}
+                    product_id={product._id}
+                  />
+                ))}
+              </>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </MenuList>
@@ -85,10 +68,10 @@ export default function StoreProductMenu() {
   );
 }
 
-function StoreProductItem({ label, img_icon }) {
+function StoreProductItem({ product_id, label, img_icon }) {
   return (
     <div className="w-full h-12 flex items-center shadow shadow-gray-400 rounded-md ">
-      <Link to={label.toLowerCase()} className="w-full h-full">
+      <Link to={"/store/product/" + product_id} className="w-full h-full">
         <div className="w-full h-full rounded-md text-black font-black flex items-center px-3 text-base ibm-font duration-100 hover:text-white hover:bg-black">
           {label}
         </div>

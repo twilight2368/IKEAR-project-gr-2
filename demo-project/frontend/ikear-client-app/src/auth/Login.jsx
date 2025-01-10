@@ -9,12 +9,15 @@ import {
 import LogoImage from "../assets/icons/polar-bear.svg";
 import ImageBgBear from "../assets/images/animals-polar-bears-underwater-wallpaper-d0d37a04f11f62469b7f8b645375e293.jpg";
 import { FaHouse } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../app/slicer/UserSlicer";
 export default function Login() {
   const date = new Date();
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   // State to handle form input
   const [formData, setFormData] = useState({
     email: "",
@@ -50,7 +53,8 @@ export default function Login() {
         console.log("====================================");
         console.log(response.data.user);
         console.log("====================================");
-        // Redirect or perform any additional action here
+        dispatch(setUser(response.data.user));
+        navigate("/");
       }
     } catch (error) {
       console.error("Login error:", error);

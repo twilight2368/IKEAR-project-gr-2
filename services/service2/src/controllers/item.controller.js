@@ -5,12 +5,16 @@ const getItem = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const item = await ItemModel.findById(id);
+    const item = await ItemModel.findById(id).populate([
+      "room",
+      "product",
+      "holiday",
+    ]);
 
     if (!item) {
       return res.status(404).json({
         message: "Item not found",
-        data: {},
+        data: null,
       });
     }
 
@@ -19,6 +23,42 @@ const getItem = async (req, res, next) => {
       data: item,
     });
   } catch (error) {
+    next(error);
+  }
+};
+
+const getRandomItem = async (req, res, next) => {
+  try {
+    // Destructure and set default number of items to fetch.
+    const { num = 10 } = req.query;
+
+    // Parse `num` to ensure it's a number.
+    const limit = parseInt(num, 10);
+
+    if (isNaN(limit) || limit <= 0) {
+      return res
+        .status(400)
+        .json({ message: "Invalid number of items requested." });
+    }
+
+    // Fetch random items with populated fields using aggregation and population.
+    const randomItems = await ItemModel.aggregate([
+      { $sample: { size: limit } },
+    ]);
+
+    // Populate the references for the random items.
+    const populatedItems = await ItemModel.populate(randomItems, [
+      { path: "room" },
+      { path: "product" },
+      { path: "holiday" },
+    ]);
+
+    res.status(200).json({
+      message: "Successful",
+      data: populatedItems,
+    });
+  } catch (error) {
+    // Pass any errors to the error-handling middleware.
     next(error);
   }
 };
@@ -95,28 +135,42 @@ const getItemWithFilter = async (req, res, next) => {
 
 const getAllItemByRoom = async (req, res, next) => {
   try {
-    const { color, size, name, price } = req.query; // filter by color, size, name, price
+    const { color, size, name, page = 1, limit = 30 } = req.query; // Pagination parameters
     const { id } = req.params;
 
     let filter = { room: id };
 
     if (color) filter.color = color;
     if (size) filter.size = size;
-    if (name) filter.name = name;
-    if (price) filter.price = price;
+    if (name) filter.name = { $regex: name, $options: "i" }; // Case-insensitive search
 
-    const items = await ItemModel.find(filter);
+    // Calculate skip for pagination
+    const skip = (page - 1) * limit;
 
-    if (!items || items.length == 0) {
+    // Find items with pagination
+    const items = await ItemModel.find(filter)
+      .skip(skip)
+      .limit(parseInt(limit, 10));
+
+    // Count total items for metadata
+    const totalItems = await ItemModel.countDocuments(filter);
+
+    if (!items || items.length === 0) {
       return res.status(404).json({
-        message: "Item not found",
+        message: "Items not found",
         data: [],
       });
     }
 
     res.json({
-      message: "Item found",
+      message: "Items found",
       data: items,
+      metadata: {
+        totalItems,
+        currentPage: parseInt(page, 10),
+        totalPages: Math.ceil(totalItems / limit),
+        itemsPerPage: parseInt(limit, 10),
+      },
     });
   } catch (error) {
     next(error);
@@ -125,28 +179,42 @@ const getAllItemByRoom = async (req, res, next) => {
 
 const getAllItemByProduct = async (req, res, next) => {
   try {
-    const { color, size, name, price } = req.query; // filter by color, size, name, price
+    const { color, size, name, page = 1, limit = 30 } = req.query; // Pagination parameters
     const { id } = req.params;
 
     let filter = { product: id };
 
     if (color) filter.color = color;
     if (size) filter.size = size;
-    if (name) filter.name = name;
-    if (price) filter.price = price;
+    if (name) filter.name = { $regex: name, $options: "i" }; // Case-insensitive search
 
-    const items = await ItemModel.find(filter);
+    // Calculate skip for pagination
+    const skip = (page - 1) * limit;
 
-    if (!items || items.length == 0) {
+    // Find items with pagination
+    const items = await ItemModel.find(filter)
+      .skip(skip)
+      .limit(parseInt(limit, 10));
+
+    // Count total items for metadata
+    const totalItems = await ItemModel.countDocuments(filter);
+
+    if (!items || items.length === 0) {
       return res.status(404).json({
-        message: "Item not found",
+        message: "Items not found",
         data: [],
       });
     }
 
     res.json({
-      message: "Item found",
+      message: "Items found",
       data: items,
+      metadata: {
+        totalItems,
+        currentPage: parseInt(page, 10),
+        totalPages: Math.ceil(totalItems / limit),
+        itemsPerPage: parseInt(limit, 10),
+      },
     });
   } catch (error) {
     next(error);
@@ -155,7 +223,7 @@ const getAllItemByProduct = async (req, res, next) => {
 
 const getAllItemByHoliday = async (req, res, next) => {
   try {
-    const { color, size, name, price } = req.query; // filter by color, size, name, price
+    const { color, size, name } = req.query; // filter by color, size, name, price
     const { id } = req.params;
 
     let filter = { product: id };
@@ -163,7 +231,6 @@ const getAllItemByHoliday = async (req, res, next) => {
     if (color) filter.color = color;
     if (size) filter.size = size;
     if (name) filter.name = name;
-    if (price) filter.price = price;
 
     const items = await ItemModel.find(filter);
 
@@ -288,6 +355,7 @@ module.exports = {
   getAllItemByRoom,
   getAllItemByProduct,
   getAllItemByHoliday,
+  getRandomItem,
   createItem,
   updateItem,
   deleteItem,
