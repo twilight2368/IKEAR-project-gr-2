@@ -20,8 +20,11 @@ export default function ItemCard() {
         <div className="w-full text-black mt-2">
           <span className="text-black">Product</span>
         </div>
-        <div className="w-full text-black mb-2">
+        <div className="w-full text-black">
           <span className="text-black">Room</span>
+        </div>
+        <div className="w-full text-black mb-2">
+          <span className="text-black">Holiday</span>
         </div>
       </CardBody>
     </Card>

@@ -1,5 +1,6 @@
 const StoreModel = require("../models/schema/Store");
-
+const { publishToQueue } = require("../utils/mq");
+const EVENT_TYPE = require("../constants/mq/type");
 //TODO: STORE CONTROLLERS
 const getStores = async (req, res, next) => {
   try {
@@ -50,8 +51,6 @@ const createStore = async (req, res, next) => {
       description,
       phone,
       address,
-      longitude,
-      latitude,
       city,
       country,
       weekdayOpen,
@@ -65,8 +64,6 @@ const createStore = async (req, res, next) => {
       description,
       phone,
       address,
-      longitude,
-      latitude,
       city,
       country,
       weekdayOpen,
@@ -77,7 +74,27 @@ const createStore = async (req, res, next) => {
 
     await newStore.save();
 
-    res.json({
+    //todo: Publish to RabbitMQ "store" queue
+    const message = JSON.stringify({
+      event: EVENT_TYPE.CREATE,
+      data: {
+        _id: newStore._id,
+        name: newStore.name,
+        description: newStore.description,
+        phone: newStore.phone,
+        address: newStore.address,
+        city: newStore.city,
+        country: newStore.country,
+        weekdayOpen: newStore.weekdayOpen,
+        weekdayClose: newStore.weekdayClose,
+        weekendOpen: newStore.weekendOpen,
+        weekendClose: newStore.weekendClose,
+      },
+    });
+
+    await publishToQueue("store", message);
+
+    res.status(201).json({
       message: "Create store successful",
       data: newStore,
     });

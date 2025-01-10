@@ -6,7 +6,7 @@ const authRouter = require("./routes/auth.routes");
 const storeRouter = require("./routes/store.routes");
 const employeeRouter = require("./routes/employee.routes");
 const userRouter = require("./routes/user.routes");
-
+const otherRouter = require("./routes/other.routes");
 const errorHandling = require("./middlewares/errorHandling");
 
 app.use(express.json());
@@ -25,7 +25,7 @@ app.use("/auth", authRouter);
 app.use("/store", storeRouter);
 app.use("/user", userRouter);
 app.use("/employee", employeeRouter);
-
+app.use("/other", otherRouter);
 app.use(errorHandling);
 
 module.exports = app;

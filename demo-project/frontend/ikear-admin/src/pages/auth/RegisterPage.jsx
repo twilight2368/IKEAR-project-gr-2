@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Input, Button, Select, Option } from "@material-tailwind/react";
 
-const ROLE_LIST = {
-  ROLES: {
-    ADMIN: "Admin",
-    EMPLOYEE: "Employee",
-    MANAGER: "Manager",
-  },
-};
-
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
     name: "",
@@ -76,7 +68,7 @@ export default function RegisterPage() {
             onChange={handleChange}
             required
           />
-          <Select
+          {/* <Select
             label="Role"
             value={formData.role}
             onChange={(value) =>
@@ -103,7 +95,7 @@ export default function RegisterPage() {
                 {store.name}
               </Option>
             ))}
-          </Select>
+          </Select> */}
           <Button type="submit" fullWidth>
             Register
           </Button>

@@ -1,5 +1,6 @@
 const { Item: ItemModel } = require("../models/schemas/Item");
-
+const { publishToExchange } = require("../utils/mq");
+const EVENT_TYPE = require("../constants/mq/type");
 const getItem = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -162,6 +163,9 @@ const getAllItemByHoliday = async (req, res, next) => {
 
 const createItem = async (req, res, next) => {
   try {
+    console.log("====================================");
+    console.log(req.body);
+    console.log("====================================");
     const {
       name,
       description,
@@ -188,7 +192,15 @@ const createItem = async (req, res, next) => {
 
     await newItem.save();
 
-    res.json({
+    publishToExchange(
+      "product",
+      JSON.stringify({
+        event: EVENT_TYPE.CREATE,
+        data: newItem,
+      })
+    );
+
+    res.status(201).json({
       message: "Item created",
       data: newItem,
     });

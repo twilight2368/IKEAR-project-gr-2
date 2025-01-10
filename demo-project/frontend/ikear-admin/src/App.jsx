@@ -7,10 +7,11 @@ import RegisterPage from "./pages/auth/RegisterPage";
 import LoginPage from "./pages/auth/LoginPage";
 import AdminRoutes from "./routes/AdminRoutes";
 import StoreRoutes from "./routes/StoreRoutes";
-
+import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <>
+      <ToastContainer />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
