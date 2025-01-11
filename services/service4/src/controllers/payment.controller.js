@@ -1,26 +1,7 @@
-const {
-  createOrder,
-  getAllOrders,
-  getAllOrdersByStore,
-  getAllOrdersByUser,
-  updateOrderStatus,
-  getOneOrder,
-} = require("../controllers/order.controller");
 const appConfig = require("../configs/app.config");
 const stripe = require("stripe")(appConfig.stripe.private_key);
 
-const express = require("express");
-const router = express.Router();
-
-router.get("/orders", getAllOrders);
-router.get("/orders/:id", getOneOrder);
-router.put("/orders/:id", updateOrderStatus);
-router.get("/orders/store/:id", getAllOrdersByStore);
-router.get("/orders/user/:id", getAllOrdersByUser);
-router.post("/order", createOrder);
-
-//* -------------------------------------------------------
-router.post("/payment", async (req, res) => {
+const create_intent_payment = async (req, res) => {
   try {
     const { amount } = req.body;
 
@@ -45,6 +26,6 @@ router.post("/payment", async (req, res) => {
   } catch (error) {
     next(error);
   }
-});
+};
 
-module.exports = router;
+module.exports = { create_intent_payment };

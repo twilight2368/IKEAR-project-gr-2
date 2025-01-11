@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx nodemon"
-    
   },
   "keywords": [],
   "author": "",
@@ -16,10 +15,12 @@
   },
   "dependencies": {
     "amqplib": "^0.10.5",
+    "axios": "^1.7.9",
     "cli-color": "^2.0.4",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mongoose": "^8.9.2",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "stripe": "^17.5.0"
   }
 }

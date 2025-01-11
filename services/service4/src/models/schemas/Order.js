@@ -1,10 +1,8 @@
 const mongoose = require("mongoose");
 
 const DELIVERY_TYPE = require("../../constants/delivery_type");
-const DELIVERY_STATUS = require("../../constants/delivery_status");
 const ORDER_STATUS = require("../../constants/order_status");
-
-
+const PAYMENT_TYPE = require("../../constants/payment_type");
 const OrderToItem = new mongoose.Schema({
   item: {
     type: mongoose.Schema.Types.ObjectId,
@@ -12,10 +10,6 @@ const OrderToItem = new mongoose.Schema({
     ref: "item",
   },
   quantity: {
-    type: Number,
-    min: 1,
-  },
-  price: {
     type: Number,
     min: 1,
   },
@@ -35,6 +29,7 @@ const OrderSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: Object.values(ORDER_STATUS),
+      default: ORDER_STATUS.PENDING,
       required: true,
     },
     date: {
@@ -53,22 +48,15 @@ const OrderSchema = new mongoose.Schema(
       min: 1,
     },
     items: [OrderToItem],
-    delivery: {
-      delivery_type: {
-        type: String,
-        required: true,
-        enum: Object.values(DELIVERY_TYPE),
-      },
-      delivery_status: {
-        type: String,
-        required: true,
-        enum: Object.values(DELIVERY_STATUS),
-      },
-      delivery_price: {
-        type: Number,
-        default: 0,
-        required: true,
-      },
+
+    delivery_type: {
+      type: String,
+      enum: Object.values(DELIVERY_TYPE),
+    },
+
+    payment_type: {
+      type: String,
+      enum: Object.values(PAYMENT_TYPE),
     },
 
     total_price: {
