@@ -111,7 +111,7 @@ const createInventory = async (req, res, next) => {
     await inventory.save();
 
     publishToQueue(
-      "product",
+      "inventory",
       JSON.stringify({
         event: EVENT_TYPE.CREATE,
         data: inventory,

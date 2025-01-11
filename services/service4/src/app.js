@@ -1,10 +1,11 @@
 const express = require("express");
 const errorHandling = require("./middlewares/errorHandling");
 const app = express();
-
+const morgan = require("morgan");
 const userRoutes = require("./routes/user.routes");
 const inventoryRoutes = require("./routes/inventory.routes");
 const orderRoutes = require("./routes/order.routes");
+const otherRoutes = require("./routes/other.routes");
 const { consumeFromExchange, consumeFromQueue } = require("./utils/mq");
 const UserModel = require("./models/schemas/User");
 const ItemModel = require("./models/schemas/Item");
@@ -16,6 +17,8 @@ app.use(
     extended: true,
   })
 );
+app.use(morgan("dev"));
+app.use(morgan("combined"));
 
 app.get("/", (req, res, next) => {
   res.json({
@@ -26,7 +29,7 @@ app.get("/", (req, res, next) => {
 app.use("/users", userRoutes);
 app.use("/inventory", inventoryRoutes);
 app.use("/orders", orderRoutes);
-
+app.use("/others", otherRoutes);
 app.use(errorHandling);
 
 consumeFromExchange("user", async (message) => {

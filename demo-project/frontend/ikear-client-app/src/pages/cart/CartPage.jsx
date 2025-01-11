@@ -31,17 +31,7 @@ export default function CartPage() {
               <span>{cart?.totalItems}</span>
             </li>
 
-            <div className=" flex flex-row justify-start items-center">
-              <div className=" text-sm w-2/12">Choose store</div>
-              <div className=" w-10/12">
-                <Select size="md" color="gray" label="Store">
-                  <Option className="mb-2">1231 street, city, country</Option>
-                  <Option className="mb-2">1232 street, city, country</Option>
-                  <Option className="mb-2">1233 street, city, country</Option>
-                  <Option className="mb-2">1234 street, city, country</Option>
-                </Select>
-              </div>
-            </div>
+           
           </div>
           <div className=" w-1/6 h-full flex justify-center items-center">
             <div className=" w-full h-full flex flex-col justify-center items-start">

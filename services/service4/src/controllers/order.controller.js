@@ -1,9 +1,9 @@
 const InventoryModel = require("../models/schemas/Inventory");
 const OrderModel = require("../models/schemas/Order");
-
+const ItemModel = require("../models/schemas/Item");
 const createOrder = async (req, res, next) => {
   try {
-    const { user, store, items, delivery_type } = req.body;
+    const { user, store, items, delivery_type, payment_type } = req.body;
 
     // Validate required fields
     if (
@@ -12,7 +12,8 @@ const createOrder = async (req, res, next) => {
       !items ||
       !Array.isArray(items) ||
       items.length === 0 ||
-      !delivery_type
+      !delivery_type ||
+      !payment_type
     ) {
       return res
         .status(400)
@@ -25,15 +26,17 @@ const createOrder = async (req, res, next) => {
       item: { $in: items.map((item) => item.item) },
     });
 
-    // Prepare item_inventory, calculate total_items and total_amount
+    // Prepare `items` for the order, calculate total_items and total_price
     let total_items = 0;
-    let total_amount = 0;
-    const item_inventory = [];
+    let total_item_price = 0;
+    const orderItems = [];
 
     for (const { item, quantity } of items) {
-      const inventory = inventoryItems.find(
+      const inventory = await inventoryItems.find(
         (inv) => inv.item.toString() === item
       );
+
+      const itemQuery = await ItemModel.findById(item);
 
       if (!inventory) {
         return res.status(400).json({
@@ -47,42 +50,45 @@ const createOrder = async (req, res, next) => {
         });
       }
 
-      // Add to item_inventory
-      item_inventory.push({
+      orderItems.push({
         item,
-        inventory: inventory._id,
         quantity,
-        price: inventory.price, // Assuming `price` exists in the inventory model
       });
 
       total_items += quantity;
-      total_amount += quantity * inventory.price;
+      total_item_price += quantity * itemQuery.price;
     }
+
+    const total_price = total_item_price;
 
     // Create a new order
     const newOrder = new OrderModel({
       user,
       store,
-      status: "Pending", // Default status
-      total_amount,
+      total_item_price,
       total_items,
-      item_inventory,
+      items: orderItems,
       delivery_type,
+      payment_type,
+      total_price,
     });
 
     // Save the order
     const savedOrder = await newOrder.save();
 
-    // Deduct quantities from inventory
-    for (const { inventory, quantity } of item_inventory) {
-      await InventoryModel.findByIdAndUpdate(inventory, {
-        $inc: { quantity: -quantity },
-      });
-    }
+    // // Deduct quantities from inventory
+    // for (const { item, quantity } of items) {
+    //   await InventoryModel.findOneAndUpdate(
+    //     { store, item },
+    //     { $inc: { quantity: -quantity } }
+    //   );
+    // }
 
-    res
-      .status(201)
-      .json({ message: "Order created successfully", data: savedOrder });
+    res.status(201).json({
+      success: true,
+      message: "Order created successfully",
+      data: savedOrder,
+    });
   } catch (error) {
     next(error);
   }
@@ -123,9 +129,45 @@ const getAllOrdersByUser = async (req, res, next) => {
       return res.status(400).json({ message: "User ID is required." });
     }
 
-    const orders = await OrderModel.find({ user: id }).populate(
-      "store item_inventory.item inventory"
-    );
+    const orders = await OrderModel.find({ user: id }).populate("items.item");
+    res.status(200).json({ data: orders });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getOneOrder = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({ message: "ID is required." });
+    }
+
+    const orders = await OrderModel.findById(id).populate("user items.item");
+
+    res.status(200).json({ data: orders });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const updateOrderStatus = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    if (!id) {
+      return res.status(400).json({ message: "ID is required." });
+    }
+
+    const orders = await OrderModel.findByIdAndUpdate(
+      id,
+      {
+        status: status,
+      },
+      { new: true }
+    ).populate("user items.item");
+
     res.status(200).json({ data: orders });
   } catch (error) {
     next(error);
@@ -137,4 +179,6 @@ module.exports = {
   getAllOrders,
   getAllOrdersByStore,
   getAllOrdersByUser,
+  getOneOrder,
+  updateOrderStatus,
 };

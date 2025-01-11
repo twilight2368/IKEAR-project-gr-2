@@ -38,7 +38,7 @@ export default function ItemInCart({ item }) {
           </div>
           <div className="w-5/6 h-full flex flex-row">
             <div className="w-8/12">
-              <div className="h-6 mb-2 w-full">
+              {/* <div className="h-6 mb-2 w-full">
                 {Math.round(Math.random()) ? (
                   <div className="flex flex-row gap-2 items-center text-light-green-400">
                     <FaCircleCheck />
@@ -50,7 +50,7 @@ export default function ItemInCart({ item }) {
                     <span className="text-xs">not in current IKEAR store</span>
                   </div>
                 )}
-              </div>
+              </div> */}
               <div className="text-xl font-bold text-black">
                 <Link to={`/store/item-detail/${item.id}`}>
                   <p className="truncate hover:underline">{item.name}</p>
